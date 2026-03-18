@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# npm
+*.tgz
+npm-debug.log*
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Planning (local only, never publish)
+.planning/

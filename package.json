@@ -1,0 +1,34 @@
+{
+  "name": "prism-forge",
+  "version": "0.0.0",
+  "description": "Deterministic persona routing for AI coding assistants. Many minds. No menu.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Anthony Hipp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prism-forge/prism.git"
+  },
+  "bin": {
+    "prism-forge": "./bin/cli.js"
+  },
+  "files": [
+    "src/",
+    "bin/",
+    "lib/",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "personas",
+    "routing",
+    "ai-assistants",
+    "developer-tools"
+  ]
+}
