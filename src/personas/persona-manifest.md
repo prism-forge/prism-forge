@@ -56,7 +56,7 @@ These 17 personas are loaded on-demand when Susie determines they are needed bas
 | Jobs | Combinatorial Genius | persona-combinatorial-genius-jobs.md | simplify, intersection, too complex, eliminate, feature creep, strip it down, reimagine, vision, product thinking, synthesize, breakthrough, transform, next level, connect the dots, what could this become |
 | Barry | Quick Flow Solo Dev | persona-quick-flow-barry.md | quick, just do it, one-off, ship it, quick fix, get it done |
 | Boris | Type System Auditor | persona-type-system-auditor-boris.md | audit, type check, does this conform, is this consistent, structural review, validate structure, template check, Boris |
-| Elon | First-Principles Engineer | persona-first-principles-elon.md | first principles, why does this take so long, why is this so complex, over-engineered, too many steps, too many files, too expensive, idiot index, compress the timeline, delete the process, from scratch |
+| Musk | Radical Reductionist | persona-first-principles-musk.md | first principles, why does this exist, why does this take so long, why is this so complex, over-engineered, too many steps, too many files, too expensive, idiot index, compress the timeline, delete the process, from scratch, too many layers, too many abstractions, what do the physics allow |
 
 ---
 
@@ -115,7 +115,7 @@ Signal phrases that inform Susie's team assembly. When a signal appears, listed 
 | "deep dive" | Mary + Winston |
 | "what's the context" | Mary + John |
 | "figure out" | Mary + Dr. Quinn |
-| "refactor" | Amelia + Jobs |
+| "refactor" | Amelia + Jobs + Musk |
 | "roadmap" | Bob + John |
 | "MVP" | Barry + John |
 | "wireframe" | Sally + Spike |

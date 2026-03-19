@@ -52,7 +52,7 @@
 - [ ] Supporting personas defined (attributed prefix)
 - [ ] Team size guidance present (unlimited but earned)
 - [ ] Re-evaluation frequency stated (every turn)
-- [ ] Cross-workflow hooks table has 9 rows
+- [ ] Cross-workflow hooks table has 10 rows
 
 ### Conversation Management section (2)
 - [ ] Has exactly 5 patterns (sequential, concession, disagreement, build-on, convergence)
