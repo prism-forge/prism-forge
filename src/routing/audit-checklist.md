@@ -1,4 +1,4 @@
-# PRISM — System Audit Checklist
+# PRISM -- System Audit Checklist
 
 > Boris (Type System Auditor) lead, Quinn (QA Engineer) support.
 > Run when: new personas added, routing engine modified, system installed on new machine, or drift suspected.
@@ -12,38 +12,88 @@
 - [ ] No domain-specific content (Tableau, Snowflake, Jira) in global personas
 
 ### Always-On (4)
-- [ ] `persona-analyst-mary.md` — mode default: Ask
-- [ ] `persona-dev-amelia.md` — mode default: Agent
-- [ ] `persona-scrum-master-bob.md` — mode default: Plan
-- [ ] `persona-qa-quinn.md` — mode default: Any (validation signals)
+- [ ] `persona-analyst-mary.md` -- mode default: Ask
+- [ ] `persona-dev-amelia.md` -- mode default: Agent
+- [ ] `persona-scrum-master-bob.md` -- mode default: Plan
+- [ ] `persona-qa-quinn.md` -- mode default: Any (validation signals)
 
-### Session Manager (1)
-- [ ] `persona-chief-of-staff-susie.md` — Turn 1 unconditional + no-signal fallback
+### Dynamic Orchestrator (1)
+- [ ] `persona-chief-of-staff-susie.md` -- Turn 1 unconditional + no-signal fallback
 
 ### Specialists (17)
 - [ ] All 17 specialist files present and non-empty
 
 ## 2. Routing Engine Integrity
 
+### Routing engine file and framing (2)
 - [ ] `{PRISM_ROUTING}/routing-engine.md` exists
-- [ ] Mode Defaults section maps: Plan→Bob+John, Agent→Amelia, Ask→Mary, Unknown→Susie
-- [ ] Domain Registry table has 23 rows (one per work type)
-- [ ] Shared Signals Reference table has 24 entries
-- [ ] Specialist Load Protocol has 17 Read directives
-- [ ] Every Read directive path matches an actual file in `{PRISM_PERSONAS}/`
-- [ ] Processing Order has 8 items (war room → explicit name → mode switch → domain → shared signals → context-disambiguated → exclusive → fallback)
-- [ ] No orphaned persona references (name in routing engine but no file)
-- [ ] No orphaned persona files (file exists but not referenced in routing engine)
+- [ ] Title is "Persona Routing Engine -- Susie's Orchestration Manual"
+
+### Susie's Role section (2)
+- [ ] Turn 1 behavior defined (6 steps: read todo, read memory, read handoffs, check git, deliver sitrep, hand off)
+- [ ] Sitrep format has 4 items (Active, Blocked, Stale, Recommended)
+
+### Hard Overrides section (4)
+- [ ] Has exactly 3 overrides (war room, explicit name, mode switch)
+- [ ] War room specifies case-insensitive standalone phrase and ALL-persona activation
+- [ ] Explicit name specifies ALWAYS a roster change requiring announcement
+- [ ] Mode switch specifies system context detection
+
+### Mode Defaults section (1)
+- [ ] Maps 4 modes: Plan->Bob+John, Agent->Amelia, Ask->Mary, Unknown->Susie
+
+### Intent Classification section (3)
+- [ ] Table has exactly 9 intent categories
+- [ ] Each category has: Intent, Description, Typical Primary, Typical Supporting
+- [ ] Multi-intent spanning described (holistic evaluation, not sequential)
+
+### Team Assembly Protocol section (5)
+- [ ] Primary persona defined (one per turn except party mode)
+- [ ] Supporting personas defined (attributed prefix)
+- [ ] Team size guidance present (unlimited but earned)
+- [ ] Re-evaluation frequency stated (every turn)
+- [ ] Cross-workflow hooks table has 9 rows
+
+### Conversation Management section (2)
+- [ ] Has exactly 5 patterns (sequential, concession, disagreement, build-on, convergence)
+- [ ] Each pattern has example format
+
+### Domain Registry in Reference Tables (2)
+- [ ] Has exactly 23 rows
+- [ ] Every domain row has: Work Type, Primary Owner, Supporting, Notes
+
+### Signal Guide in Reference Tables (3)
+- [ ] Shared signals sub-table has exactly 24 entries
+- [ ] Specialist signals sub-table has exactly 17 entries
+- [ ] Each specialist signal row maps to exactly one persona
+
+### Specialist Load Protocol (4)
+- [ ] Has exactly 17 specialist entries
+- [ ] Every entry has: name, signals, Read directive path, announce line
+- [ ] Every Read path follows `{PRISM_PERSONAS}/persona-{slug}.md` pattern
+- [ ] Every Read path matches an actual file in `{PRISM_PERSONAS}/`
+
+### No orphaned references (2)
+- [ ] Every persona named in routing engine has a corresponding file
+- [ ] Every persona file is referenced in routing engine
+
+### Remaining sections present (5)
+- [ ] Announcements section exists with join/switch/party patterns
+- [ ] Skill-Context Interaction section exists
+- [ ] Handoff Protocol section exists
+- [ ] Shared Persona Protocols section exists (simplification, multi-persona, formatting)
+- [ ] Correction Memory section exists
 
 ## 3. Manifest Consistency
 
 - [ ] `persona-manifest.md` lists all 22 personas
 - [ ] Always-On table has 4 entries matching actual always-on files
-- [ ] Session Manager table has 1 entry (Susie)
+- [ ] Dynamic Orchestrator table has 1 entry (Susie)
 - [ ] Specialist table has 17 entries matching actual specialist files
 - [ ] Signal Coverage Map domains match routing engine Domain Registry
-- [ ] Shared Signals table matches routing engine Shared Signals Reference
-- [ ] Routing Quick Reference matches Processing Order behavior
+- [ ] Shared Signals table matches routing engine Signal Guide shared signals
+- [ ] Routing Quick Reference includes multi-intent example
+- [ ] How to Use section describes Susie as dynamic orchestrator (not pipeline processor)
 
 ## 4. Global CLAUDE.md Integration
 
@@ -81,8 +131,8 @@
 
 ---
 
-**Total checks:** 48
-**Pass threshold:** 48/48 (no partial credit — every check is structural)
+**Total checks:** 76
+**Pass threshold:** 76/76 (no partial credit -- every check is structural)
 
-*Last updated: 2026-03-18*
-*PRISM v1.0 — Persona Engine*
+*Last updated: 2026-03-19*
+*PRISM v1.0 -- Persona Engine*
