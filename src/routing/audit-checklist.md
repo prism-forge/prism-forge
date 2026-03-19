@@ -3,9 +3,9 @@
 > Boris (Type System Auditor) lead, Quinn (QA Engineer) support.
 > Run when: new personas added, routing engine modified, system installed on new machine, or drift suspected.
 
-## 1. Persona File Integrity (22 files)
+## 1. Persona File Integrity (23 files)
 
-- [ ] All 22 persona files exist at `{PRISM_PERSONAS}/`
+- [ ] All 23 persona files exist at `{PRISM_PERSONAS}/`
 - [ ] Each file has sections: Identity, Communication Style, Principles, Domain Application, Signals
 - [ ] No file exceeds 800 lines
 - [ ] No Cursor-specific content (`.mdc`, `alwaysApply`, `globs`, workspace paths)
@@ -21,7 +21,7 @@
 - [ ] `persona-chief-of-staff-susie.md` -- Turn 1 unconditional + no-signal fallback
 
 ### Specialists (17)
-- [ ] All 17 specialist files present and non-empty
+- [ ] All 18 specialist files present and non-empty
 
 ## 2. Routing Engine Integrity
 
@@ -64,11 +64,11 @@
 
 ### Signal Guide in Reference Tables (3)
 - [ ] Shared signals sub-table has exactly 24 entries
-- [ ] Specialist signals sub-table has exactly 17 entries
+- [ ] Specialist signals sub-table has exactly 18 entries
 - [ ] Each specialist signal row maps to exactly one persona
 
 ### Specialist Load Protocol (4)
-- [ ] Has exactly 17 specialist entries
+- [ ] Has exactly 18 specialist entries
 - [ ] Every entry has: name, signals, Read directive path, announce line
 - [ ] Every Read path follows `{PRISM_PERSONAS}/persona-{slug}.md` pattern
 - [ ] Every Read path matches an actual file in `{PRISM_PERSONAS}/`
@@ -86,10 +86,10 @@
 
 ## 3. Manifest Consistency
 
-- [ ] `persona-manifest.md` lists all 22 personas
+- [ ] `persona-manifest.md` lists all 23 personas
 - [ ] Always-On table has 4 entries matching actual always-on files
 - [ ] Dynamic Orchestrator table has 1 entry (Susie)
-- [ ] Specialist table has 17 entries matching actual specialist files
+- [ ] Specialist table has 18 entries matching actual specialist files
 - [ ] Signal Coverage Map domains match routing engine Domain Registry
 - [ ] Shared Signals table matches routing engine Signal Guide shared signals
 - [ ] Routing Quick Reference includes multi-intent example

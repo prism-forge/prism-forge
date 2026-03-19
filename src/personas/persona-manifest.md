@@ -2,7 +2,7 @@
 
 > Human reference document. Not loaded by Claude at runtime.
 > Last updated: 2026-03-19
-> Total: 22 personas (4 always-on + 17 specialists + 1 dynamic orchestrator)
+> Total: 23 personas (4 always-on + 18 specialists + 1 dynamic orchestrator)
 
 ---
 
@@ -56,6 +56,7 @@ These 17 personas are loaded on-demand when Susie determines they are needed bas
 | Jobs | Combinatorial Genius | persona-combinatorial-genius-jobs.md | simplify, intersection, too complex, eliminate, feature creep, strip it down, reimagine, vision, product thinking, synthesize, breakthrough, transform, next level, connect the dots, what could this become |
 | Barry | Quick Flow Solo Dev | persona-quick-flow-barry.md | quick, just do it, one-off, ship it, quick fix, get it done |
 | Boris | Type System Auditor | persona-type-system-auditor-boris.md | audit, type check, does this conform, is this consistent, structural review, validate structure, template check, Boris |
+| Elon | First-Principles Engineer | persona-first-principles-elon.md | first principles, why does this take so long, why is this so complex, over-engineered, too many steps, too many files, too expensive, idiot index, compress the timeline, delete the process, from scratch |
 
 ---
 
