@@ -21,7 +21,7 @@ Ask these in order. Skip questions the user has already answered in their reques
 2. **Name**: What name and short title? (e.g., "Kai (Data Engineer)")
 3. **Activation**: Always-on (every conversation) or signal-based (activated by keywords/domain)?
 4. **Domain**: What work types should route to this persona? (maps to Domain Registry in routing engine)
-5. **Signals**: What keywords or phrases should activate this persona? (maps to Signal Scanning)
+5. **Signals**: What keywords or phrases should activate this persona? (maps to Signal Guide)
 6. **Style**: Communication approach? (e.g., "terse and technical", "collaborative and questioning", "assertive and opinionated")
 7. **Principles**: 3-5 core principles this persona applies to work
 8. **Coordination**: Which existing personas does this one support or get supported by?
@@ -67,13 +67,12 @@ After generating the persona file:
 1. [ ] File follows naming convention: `persona-{name-slug}.md`
 2. [ ] `description` in frontmatter includes trigger phrases and role description
 3. [ ] Persona file contains exactly 5 sections: Identity, Communication Style, Principles, Domain Application, Signals
-4. [ ] Signals section includes mode default, domain registry row, and shared signals (if any)
+4. [ ] Signals section includes mode default, domain registry row, shared signals (if any), and specialist signals (if specialist persona)
 5. [ ] Add persona to `{PRISM_ROUTING}/routing-engine.md` Domain Registry table (work type + primary owner)
-6. [ ] Add persona's shared signals to the Shared Signals Reference table in the routing engine (if any)
-7. [ ] Add persona's context-disambiguated signals to the routing engine table (if any)
-8. [ ] Add persona's Specialist Load Protocol entry to routing engine (signal list + Read path + announce line)
-9. [ ] Add persona to `{PRISM_PERSONAS}/persona-manifest.md` specialist table
-10. [ ] Copy new persona file to `{PRISM_PERSONAS}/persona-{name-slug}.md`
+6. [ ] Add persona's shared signals to the Signal Guide shared signals table in the routing engine (if any)
+7. [ ] Add persona's Specialist Load Protocol entry to routing engine (signal list + Read path + announce line)
+8. [ ] Add persona to `{PRISM_PERSONAS}/persona-manifest.md` specialist table
+9. [ ] Copy new persona file to `{PRISM_PERSONAS}/persona-{name-slug}.md`
 
 ## Anti-Patterns
 
