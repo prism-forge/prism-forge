@@ -1,14 +1,14 @@
 # Persona Manifest
 
 > Human reference document. Not loaded by Claude at runtime.
-> Last updated: 2026-03-17
-> Total: 22 personas (4 always-on + 17 specialists + 1 session manager)
+> Last updated: 2026-03-19
+> Total: 22 personas (4 always-on + 17 specialists + 1 dynamic orchestrator)
 
 ---
 
 ## How to Use This Manifest
 
-Always-on personas (Mary, Amelia, Bob, Quinn) are preloaded in every Claude Code session via the global CLAUDE.md reference — they respond without any explicit invocation. Specialist personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive pointing to the persona file. Susie (Chief of Staff) activates unconditionally on Turn 1 of every session regardless of mode, then serves as the no-signal fallback when no domain or signal match fires.
+Always-on personas (Mary, Amelia, Bob, Quinn) are preloaded in every Claude Code session via the global CLAUDE.md reference -- they respond without any explicit invocation. Specialist personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive pointing to the persona file. Susie (Chief of Staff) is the dynamic orchestrator -- she activates unconditionally on Turn 1, then evaluates every subsequent message to assemble the right persona team. She classifies user intent, selects primary and supporting personas, and manages multi-persona conversations. The routing engine is Susie's orchestration manual.
 
 ---
 
@@ -25,17 +25,17 @@ These 4 personas are preloaded in every Claude Code session via the global CLAUD
 
 ---
 
-## Session Manager
+## Dynamic Orchestrator
 
 | Name | Role | File | Activation | Key Behavior |
 |------|------|------|------------|--------------|
-| Susie | Chief of Staff | persona-chief-of-staff-susie.md | Turn 1 unconditional + no-signal fallback (not Mary) | Reads todo.md, memory/, docs/handoffs/, git state; delivers Active/Blocked/Stale/Recommended sitrep; hands off to appropriate persona |
+| Susie | Chief of Staff / Dynamic Orchestrator | persona-chief-of-staff-susie.md | Turn 1 unconditional + per-turn orchestration + no-signal fallback | Turn 1: sitrep (Active/Blocked/Stale/Recommended). Every turn: classifies intent, assembles persona team (primary + supporting), manages multi-persona responses. War room: active moderator. Fallback: holds floor when no signal fires. |
 
 ---
 
 ## Specialist Personas (On-Demand)
 
-These 17 personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive.
+These 17 personas are loaded on-demand when Susie determines they are needed based on intent classification, domain matching, and signal detection. The routing engine executes a Read directive to load the persona file.
 
 | Name | Role | File | Trigger Signals |
 |------|------|------|-----------------|
@@ -63,7 +63,7 @@ These 17 personas are loaded on-demand when routing-engine.md detects their trig
 
 ### By Domain
 
-Each row lists the domain from the routing-engine.md Domain Registry, the primary owner, and supporting personas.
+Susie consults this registry when evaluating user intent. It is a reference guide for team assembly, not a rigid lookup pipeline.
 
 | Domain | Primary Owner | Supporting | Notes |
 |--------|--------------|------------|-------|
@@ -93,10 +93,10 @@ Each row lists the domain from the routing-engine.md Domain Registry, the primar
 
 ### Shared Signals
 
-Signal phrases that activate multiple personas simultaneously. Source: routing-engine.md Shared Signals Reference table.
+Signal phrases that inform Susie's team assembly. When a signal appears, listed personas are RELEVANT -- Susie decides which to activate based on full message context.
 
-| Signal | Activates |
-|--------|-----------|
+| Signal | Relevant Personas |
+|--------|-------------------|
 | "requirements" | Mary + John + Bob |
 | "scope" | John + Bob |
 | "review" | Quinn + Paige |
@@ -126,7 +126,7 @@ Signal phrases that activate multiple personas simultaneously. Source: routing-e
 
 ## Routing Quick Reference
 
-Most common intents and which persona activates first:
+Susie evaluates each message and assembles the right team. Common patterns:
 
 | User Intent | Activates |
 |-------------|-----------|
@@ -140,7 +140,8 @@ Most common intents and which persona activates first:
 | "Does this conform to the template?" | Boris (Type System Auditor) |
 | "What's the user experience here?" | Sally (UX Designer) + Maya (Design Thinking Coach) |
 | "What's the business case?" | John (Product Manager) |
-| Start of a new session | Susie (Chief of Staff) — unconditional on Turn 1 |
+| Start of a new session | Susie (Chief of Staff) -- unconditional on Turn 1 |
+| "Plan how to refactor the auth module" | Bob (lead) + Jobs + Victor + Amelia (Susie assembles multi-persona team) |
 
 ---
 
@@ -151,7 +152,7 @@ Install target for all persona files:
 
 Always-on personas (Mary, Amelia, Bob, Quinn) are referenced in `{PRISM_CLAUDE_MD}`.
 Specialist personas are referenced in `{PRISM_ROUTING}/routing-engine.md` via Read directives.
-Susie (Chief of Staff) is referenced in `{PRISM_ROUTING}/routing-engine.md` under Session Start behavior.
+Susie (Chief of Staff / Dynamic Orchestrator) is referenced in `{PRISM_ROUTING}/routing-engine.md` as the orchestration subject.
 
 To install all persona files:
 ```bash
