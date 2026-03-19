@@ -56,7 +56,7 @@
 
 ## 5. Workflow Gates
 
-- [ ] `~/.claude/rules/development-workflow.md` contains "Post-Task Lessons Gate" (section 5)
+- [ ] User's `development-workflow.md` contains "Post-Task Lessons Gate" (section 5)
 - [ ] Contains "Auto-Skill Detection" (section 6)
 - [ ] Contains "Auto-Persona Gap Detection" (section 7) referencing create-persona skill
 - [ ] Contains "Context Checkpoint" (section 8) referencing `docs/handoffs/`
