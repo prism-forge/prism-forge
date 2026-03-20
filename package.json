@@ -10,7 +10,7 @@
     "url": "git+https://github.com/prism-forge/prism.git"
   },
   "bin": {
-    "prism-forge": "./bin/cli.js"
+    "prism-forge": "./bin/prism-forge.js"
   },
   "files": [
     "src/",
