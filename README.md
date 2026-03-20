@@ -127,6 +127,7 @@ Activate on signal -- loaded on-demand by Susie when needed:
 - [Signal Reference](docs/signals.md) -- Complete signal tables and routing behavior
 - [Customization Guide](docs/customization.md) -- Creating your own personas
 - [Contributing](CONTRIBUTING.md) -- How to contribute personas and code
+- [Changelog](CHANGELOG.md) -- Version history
 
 ## Community and Support
 
