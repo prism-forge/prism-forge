@@ -4,13 +4,13 @@
   "description": "Deterministic persona routing for AI coding assistants. Many minds. No menu.",
   "type": "module",
   "license": "MIT",
-  "author": "Anthony Hipp",
+  "author": "DrakkoTarkin",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prism-forge/prism.git"
   },
   "bin": {
-    "prism-forge": "./bin/prism-forge.js"
+    "prism-forge": "bin/prism-forge.js"
   },
   "files": [
     "src/",
