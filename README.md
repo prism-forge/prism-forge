@@ -133,7 +133,10 @@ Activate on signal -- loaded on-demand by Susie when needed:
 ## Community and Support
 
 - [GitHub Issues](https://github.com/prism-forge/prism-forge/issues) -- Bug reports and feature requests
-- [GitHub Discussions](https://github.com/prism-forge/prism-forge/discussions) -- Questions and community conversation (will be enabled on the public repo)
+- [GitHub Discussions](https://github.com/prism-forge/prism-forge/discussions) -- Questions and community conversation
+- [Bluesky](https://bsky.app/profile/drakkotarkin.bsky.social) -- Follow for updates and dev community discussion
+- [Twitter/X](https://twitter.com/drakkotarkin) -- Threads and announcements
+- [LinkedIn](https://www.linkedin.com/in/anthonyjhipp) -- Professional updates from the creator
 
 ## Contributing
 
