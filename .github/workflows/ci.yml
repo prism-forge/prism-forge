@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Pack tarball
+        run: npm pack
+
+      - name: Install from tarball
+        run: |
+          mkdir /tmp/install-test
+          cp prism-forge-*.tgz /tmp/install-test/
+          cd /tmp/install-test
+          npm init -y
+          npm install ./prism-forge-*.tgz
+
+      - name: Smoke test
+        run: |
+          cd /tmp/install-test
+          npx prism-forge --help
+
+      - name: Check package size
+        run: |
+          SIZE=$(wc -c < prism-forge-*.tgz)
+          echo "Package size: $SIZE bytes"
+          if [ "$SIZE" -gt 1048576 ]; then
+            echo "::error::Package exceeds 1MB. Check for accidentally included files."
+            exit 1
+          fi
+
+      - name: List package contents
+        run: npm pack --dry-run 2>&1
