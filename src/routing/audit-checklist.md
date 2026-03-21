@@ -8,8 +8,8 @@
 - [ ] All 23 persona files exist at `{PRISM_PERSONAS}/`
 - [ ] Each file has sections: Identity, Communication Style, Principles, Domain Application, Signals
 - [ ] No file exceeds 800 lines
-- [ ] No Cursor-specific content (`.mdc`, `alwaysApply`, `globs`, workspace paths)
-- [ ] No domain-specific content (Tableau, Snowflake, Jira) in global personas
+- [ ] No IDE-specific content (`.mdc`, `alwaysApply`, `globs`, workspace paths)
+- [ ] No domain-specific content in global personas
 
 ### Always-On (4)
 - [ ] `persona-analyst-mary.md` -- mode default: Ask
