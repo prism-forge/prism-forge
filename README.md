@@ -131,8 +131,8 @@ Activate on signal -- loaded on-demand by Susie when needed:
 
 ## Community and Support
 
-- [GitHub Issues](https://github.com/prism-forge/prism/issues) -- Bug reports and feature requests
-- [GitHub Discussions](https://github.com/prism-forge/prism/discussions) -- Questions and community conversation (will be enabled on the public repo)
+- [GitHub Issues](https://github.com/prism-forge/prism-forge/issues) -- Bug reports and feature requests
+- [GitHub Discussions](https://github.com/prism-forge/prism-forge/discussions) -- Questions and community conversation (will be enabled on the public repo)
 
 ## Contributing
 

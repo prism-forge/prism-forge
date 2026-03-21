@@ -1,13 +1,17 @@
 {
   "name": "prism-forge",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Deterministic persona routing for AI coding assistants. Many minds. No menu.",
   "type": "module",
   "license": "MIT",
   "author": "DrakkoTarkin",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/prism-forge/prism.git"
+    "url": "git+https://github.com/prism-forge/prism-forge.git"
+  },
+  "homepage": "https://github.com/prism-forge/prism-forge#readme",
+  "bugs": {
+    "url": "https://github.com/prism-forge/prism-forge/issues"
   },
   "bin": {
     "prism-forge": "bin/prism-forge.js"
