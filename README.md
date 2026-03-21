@@ -7,6 +7,7 @@
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT"></a>
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen" alt="Node.js"></a>
   <a href="https://www.npmjs.com/package/prism-forge"><img src="https://img.shields.io/npm/dm/prism-forge" alt="npm downloads"></a>
+  <a href="https://github.com/prism-forge/prism-forge/actions/workflows/ci.yml"><img src="https://github.com/prism-forge/prism-forge/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
 </p>
 
 <h3 align="center">Many minds. No menu.</h3>
