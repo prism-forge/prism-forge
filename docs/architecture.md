@@ -87,7 +87,7 @@ Susie evaluates the user's message holistically on every turn:
 
 4. **Assemble persona team** -- Select primary owner from Domain Registry, add supporting personas based on context. Every supporting persona must earn their seat by adding a genuinely different perspective.
 
-5. **Manage multi-persona response** -- Each persona's contribution is attributed with `**Name (Role):**` prefix. Voices stay distinct. Susie surfaces disagreements and manages convergence.
+5. **Manage multi-persona response** -- Each persona's contribution is attributed with `**Name (Role):**` on its own line, with content starting on the next line. Voices stay distinct. Susie surfaces disagreements and manages convergence.
 
 ### Signal Processing
 

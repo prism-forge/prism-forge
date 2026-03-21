@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/Logo/Prism_Forge_Logo.png" alt="PRISM Forge" width="400">
+  <img src="https://raw.githubusercontent.com/prism-forge/prism-forge/main/docs/Logo/Prism_Forge_Logo.png" alt="PRISM Forge" width="400">
 </p>
 
 <p align="center">
