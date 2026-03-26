@@ -1,0 +1,26 @@
+{
+  "name": "@prism-forge/local-boost",
+  "version": "0.1.0",
+  "description": "Local Boost — Unified local business optimization platform. GBP audit + review management + AI responses + reporting.",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "test": "node --test src/**/*.test.js",
+    "db:migrate": "node src/db/migrate.js",
+    "audit:run": "node src/modules/gbp-audit/run-audit.js"
+  },
+  "keywords": ["local-business", "gbp", "google-business", "reviews", "smb", "saas"],
+  "author": "Prism Forge <hello@prismforge.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "dotenv": "^16.4.0",
+    "stripe": "^17.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "zod": "^3.23.0",
+    "pdfkit": "^0.15.0"
+  },
+  "devDependencies": {}
+}
