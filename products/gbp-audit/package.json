@@ -1,0 +1,25 @@
+{
+  "name": "@prism-forge/gbp-audit",
+  "version": "1.0.0",
+  "description": "AI-powered Google Business Profile audit tool — generates comprehensive audit reports with scoring and recommendations",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "gbp-audit": "./src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "audit": "node src/cli.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test src/**/*.test.js"
+  },
+  "keywords": ["google-business-profile", "gbp", "local-seo", "audit", "smb"],
+  "author": "Prism Forge <hello@prismforge.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "pdfkit": "^0.15.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {}
+}

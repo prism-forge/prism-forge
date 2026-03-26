@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free GBP Audit — How Does Your Business Look on Google?</title>
+  <meta name="description" content="Get a free Google Business Profile audit report. See how your business compares to competitors and get actionable recommendations.">
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1e40af;
+      --success: #059669;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --dark: #111827;
+      --gray: #6b7280;
+      --light: #f9fafb;
+      --border: #e5e7eb;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--dark); line-height: 1.6; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 80px 20px 60px; text-align: center; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 16px; font-weight: 800; }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 32px; }
+
+    /* Search form */
+    .search-box { max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    .search-box label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; text-align: left; }
+    .search-box input { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem; margin-bottom: 16px; transition: border-color 0.2s; }
+    .search-box input:focus { outline: none; border-color: var(--primary); }
+    .search-btn { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .search-btn:hover { background: var(--primary-dark); }
+    .search-btn:disabled { background: var(--gray); cursor: not-allowed; }
+
+    /* Results */
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .results { display: none; }
+    .result-card { border: 2px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; }
+    .result-card:hover { border-color: var(--primary); background: #f0f4ff; }
+    .result-name { font-size: 1.1rem; font-weight: 600; }
+    .result-address { color: var(--gray); font-size: 0.9rem; }
+    .result-meta { display: flex; gap: 16px; margin-top: 8px; font-size: 0.85rem; color: var(--gray); }
+    .result-meta .rating { color: var(--warning); font-weight: 600; }
+
+    /* Audit Report */
+    .audit-report { display: none; }
+    .grade-badge { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; font-size: 2.5rem; font-weight: 800; color: white; margin-bottom: 16px; }
+    .grade-A { background: var(--success); }
+    .grade-B { background: #22c55e; }
+    .grade-C { background: var(--warning); }
+    .grade-D { background: #f97316; }
+    .grade-F { background: var(--danger); }
+
+    .score-bar { display: flex; align-items: center; margin-bottom: 12px; }
+    .score-label { width: 180px; font-size: 0.9rem; font-weight: 500; }
+    .score-track { flex: 1; height: 24px; background: var(--border); border-radius: 12px; overflow: hidden; margin: 0 12px; }
+    .score-fill { height: 100%; border-radius: 12px; transition: width 0.6s ease; }
+    .score-fill.good { background: var(--success); }
+    .score-fill.warning { background: var(--warning); }
+    .score-fill.critical { background: var(--danger); }
+    .score-value { width: 40px; text-align: right; font-weight: 600; font-size: 0.9rem; }
+
+    .finding { padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; font-size: 0.9rem; }
+    .finding.critical { background: #fef2f2; border-left: 4px solid var(--danger); }
+    .finding.warning { background: #fffbeb; border-left: 4px solid var(--warning); }
+    .finding.good { background: #f0fdf4; border-left: 4px solid var(--success); }
+    .finding-label { font-weight: 600; margin-bottom: 4px; }
+
+    .rec-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+    .rec-priority { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: white; text-align: center; line-height: 28px; font-weight: 600; font-size: 0.85rem; margin-right: 12px; }
+    .rec-meta { display: flex; gap: 16px; margin-top: 8px; font-size: 0.8rem; color: var(--gray); }
+
+    .cta-box { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; border-radius: 12px; padding: 32px; text-align: center; margin-top: 40px; }
+    .cta-box h3 { font-size: 1.5rem; margin-bottom: 8px; }
+    .cta-box p { opacity: 0.9; margin-bottom: 20px; }
+    .cta-box .btn { display: inline-block; padding: 12px 32px; background: white; color: var(--primary); border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 1rem; }
+
+    .download-btn { display: inline-block; padding: 10px 24px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; margin-top: 16px; }
+
+    h2 { font-size: 1.5rem; margin: 32px 0 16px; color: var(--dark); }
+    .back-link { color: var(--primary); cursor: pointer; font-size: 0.9rem; margin-bottom: 20px; display: inline-block; }
+
+    .loading { text-align: center; padding: 40px; color: var(--gray); }
+    .spinner { display: inline-block; width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 24px 0; }
+    .stat-card { text-align: center; padding: 16px; background: var(--light); border-radius: 8px; }
+    .stat-value { font-size: 2rem; font-weight: 800; color: var(--primary); }
+    .stat-label { font-size: 0.8rem; color: var(--gray); margin-top: 4px; }
+
+    footer { text-align: center; padding: 40px 20px; color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>How Does Your Business Look on Google?</h1>
+  <p>Get a free audit of your Google Business Profile in 30 seconds. See how you compare to competitors and get actionable fixes.</p>
+  <div class="search-box">
+    <label for="business">Business Name</label>
+    <input type="text" id="business" placeholder="e.g., Joe's Plumbing" autocomplete="off">
+    <label for="location">City &amp; State</label>
+    <input type="text" id="location" placeholder="e.g., Canton, GA" autocomplete="off">
+    <button class="search-btn" id="searchBtn" onclick="search()">Get Your Free Audit</button>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Search results -->
+  <div class="results" id="results">
+    <span class="back-link" onclick="goBack()">&larr; New search</span>
+    <h2>Select Your Business</h2>
+    <div id="resultsList"></div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading" id="loading" style="display:none">
+    <div class="spinner"></div>
+    <p style="margin-top:16px">Analyzing your Google Business Profile...</p>
+  </div>
+
+  <!-- Audit report -->
+  <div class="audit-report" id="auditReport">
+    <span class="back-link" onclick="goBack()">&larr; Audit another business</span>
+
+    <div style="text-align:center; margin: 24px 0;">
+      <div class="grade-badge" id="gradeBadge">?</div>
+      <h2 style="margin-top:0" id="businessName">Your Business</h2>
+      <p style="color:var(--gray)" id="businessAddress">Address</p>
+    </div>
+
+    <div class="stats-row" id="statsRow"></div>
+
+    <h2>Score Breakdown</h2>
+    <div id="scoreBreakdown"></div>
+
+    <h2>Key Findings</h2>
+    <div id="findings"></div>
+
+    <h2>Top Recommendations</h2>
+    <div id="recommendations"></div>
+
+    <div style="text-align:center">
+      <a class="download-btn" id="downloadPdf">Download PDF Report</a>
+    </div>
+
+    <div class="cta-box">
+      <h3>Need Help Fixing These Issues?</h3>
+      <p>We manage your Google Business Profile for $99/month. Profile optimization, review management, weekly posts, and monthly reporting.</p>
+      <a class="btn" href="mailto:hello@prismforge.dev?subject=GBP%20Management%20Inquiry">Get Started</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Powered by <a href="https://github.com/prism-forge">Prism Forge</a> &bull; Data from Google Places API</p>
+</footer>
+
+<script>
+  let currentPlaceId = null;
+
+  function goBack() {
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('auditReport').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  async function search() {
+    const business = document.getElementById('business').value.trim();
+    const location = document.getElementById('location').value.trim();
+    if (!business) return alert('Enter a business name');
+
+    const btn = document.getElementById('searchBtn');
+    btn.disabled = true;
+    btn.textContent = 'Searching...';
+
+    try {
+      const params = new URLSearchParams({ q: business, location });
+      const res = await fetch(`/api/search?${params}`);
+      const data = await res.json();
+
+      if (data.error) throw new Error(data.error);
+
+      const list = document.getElementById('resultsList');
+      list.innerHTML = '';
+
+      if (data.results.length === 0) {
+        list.innerHTML = '<p>No businesses found. Try a different search.</p>';
+      } else {
+        data.results.forEach(r => {
+          const card = document.createElement('div');
+          card.className = 'result-card';
+          card.onclick = () => runAudit(r.placeId);
+          card.innerHTML = `
+            <div class="result-name">${esc(r.name)}</div>
+            <div class="result-address">${esc(r.address)}</div>
+            <div class="result-meta">
+              ${r.rating ? `<span class="rating">${'★'.repeat(Math.round(r.rating))} ${r.rating}</span>` : ''}
+              ${r.reviewCount ? `<span>${r.reviewCount} reviews</span>` : ''}
+              ${r.type ? `<span>${esc(r.type)}</span>` : ''}
+            </div>
+          `;
+          list.appendChild(card);
+        });
+      }
+
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    } catch (err) {
+      alert('Search failed: ' + err.message);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Get Your Free Audit';
+    }
+  }
+
+  async function runAudit(placeId) {
+    currentPlaceId = placeId;
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('loading').scrollIntoView({ behavior: 'smooth' });
+
+    try {
+      const res = await fetch(`/api/audit/${placeId}?competitors=true`);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      renderAudit(data.audit, data.competitors);
+    } catch (err) {
+      alert('Audit failed: ' + err.message);
+      document.getElementById('loading').style.display = 'none';
+    }
+  }
+
+  function renderAudit(audit, competitors) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('auditReport').style.display = 'block';
+
+    // Grade badge
+    const badge = document.getElementById('gradeBadge');
+    badge.textContent = audit.grade;
+    badge.className = `grade-badge grade-${audit.grade}`;
+
+    document.getElementById('businessName').textContent = audit.businessName;
+    document.getElementById('businessAddress').textContent = audit.address;
+
+    // Stats
+    const stats = document.getElementById('statsRow');
+    stats.innerHTML = `
+      <div class="stat-card"><div class="stat-value">${audit.overallScore}</div><div class="stat-label">Overall Score</div></div>
+      <div class="stat-card"><div class="stat-value">${audit.scores.reviewHealth.details.averageRating || 'N/A'}</div><div class="stat-label">Rating</div></div>
+      <div class="stat-card"><div class="stat-value">${audit.scores.reviewHealth.details.totalReviews || 0}</div><div class="stat-label">Reviews</div></div>
+      <div class="stat-card"><div class="stat-value">${audit.scores.photoPresence.details.photoCount || 0}</div><div class="stat-label">Photos</div></div>
+    `;
+
+    // Score breakdown
+    const breakdown = document.getElementById('scoreBreakdown');
+    breakdown.innerHTML = '';
+    Object.values(audit.scores).forEach(s => {
+      const cls = s.score >= 70 ? 'good' : s.score >= 40 ? 'warning' : 'critical';
+      breakdown.innerHTML += `
+        <div class="score-bar">
+          <span class="score-label">${s.label}</span>
+          <div class="score-track"><div class="score-fill ${cls}" style="width:${s.score}%"></div></div>
+          <span class="score-value">${s.score}</span>
+        </div>
+      `;
+    });
+
+    // Findings
+    const findingsEl = document.getElementById('findings');
+    findingsEl.innerHTML = '';
+    audit.findings.forEach(f => {
+      findingsEl.innerHTML += `
+        <div class="finding ${f.severity}">
+          <div class="finding-label">${f.dimension} — ${f.score}/100</div>
+          ${f.finding}
+        </div>
+      `;
+    });
+
+    // Recommendations
+    const recsEl = document.getElementById('recommendations');
+    recsEl.innerHTML = '';
+    audit.recommendations.forEach((r, i) => {
+      recsEl.innerHTML += `
+        <div class="rec-card">
+          <span class="rec-priority">${i + 1}</span>
+          <strong>${r.dimension}</strong>
+          <p style="margin-top:8px">${r.action}</p>
+          <div class="rec-meta">
+            <span>${r.impact}</span>
+            <span>Effort: ${r.effort}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    // PDF download link
+    document.getElementById('downloadPdf').href = `/api/audit/${currentPlaceId}/pdf?competitors=true`;
+
+    document.getElementById('auditReport').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  // Enter key triggers search
+  document.getElementById('business').addEventListener('keypress', e => { if (e.key === 'Enter') search(); });
+  document.getElementById('location').addEventListener('keypress', e => { if (e.key === 'Enter') search(); });
+</script>
+
+</body>
+</html>
