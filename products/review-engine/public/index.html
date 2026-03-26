@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Engine — Automated Review Request Management</title>
+  <style>
+    :root { --primary: #1a56db; --primary-dark: #1e40af; --success: #059669; --warning: #d97706; --danger: #dc2626; --dark: #111827; --gray: #6b7280; --light: #f9fafb; --border: #e5e7eb; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--dark); background: var(--light); }
+
+    .sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 240px; background: var(--dark); color: white; padding: 24px 16px; }
+    .sidebar h2 { font-size: 1.1rem; margin-bottom: 24px; color: var(--primary); }
+    .sidebar a { display: block; color: #9ca3af; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-size: 0.9rem; margin-bottom: 4px; }
+    .sidebar a:hover, .sidebar a.active { background: rgba(255,255,255,0.1); color: white; }
+
+    .main { margin-left: 240px; padding: 32px; }
+    h1 { font-size: 1.5rem; margin-bottom: 24px; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: white; border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+    .stat-value { font-size: 2rem; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 0.85rem; color: var(--gray); margin-top: 4px; }
+
+    .card { background: white; border-radius: 12px; padding: 24px; border: 1px solid var(--border); margin-bottom: 24px; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 16px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-sm { padding: 6px 12px; font-size: 0.85rem; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-size: 0.8rem; text-transform: uppercase; color: var(--gray); padding: 8px 12px; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .badge-sent { background: #dbeafe; color: var(--primary); }
+    .badge-delivered { background: #d1fae5; color: var(--success); }
+    .badge-failed { background: #fee2e2; color: var(--danger); }
+    .badge-pending { background: #fef3c7; color: var(--warning); }
+    .badge-reviewed { background: #d1fae5; color: var(--success); }
+
+    .empty { text-align: center; padding: 40px; color: var(--gray); }
+    .section { display: none; }
+    .section.active { display: block; }
+    .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem; }
+    .alert-info { background: #dbeafe; color: var(--primary-dark); }
+    .alert-success { background: #d1fae5; color: #065f46; }
+
+    /* Review responder */
+    .review-box { border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+    .review-stars { color: var(--warning); font-size: 1.2rem; }
+    .response-box { background: var(--light); border-radius: 8px; padding: 12px; margin-top: 12px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>Review Engine</h2>
+  <a href="#" onclick="showSection('dashboard')" class="active" id="nav-dashboard">Dashboard</a>
+  <a href="#" onclick="showSection('setup')" id="nav-setup">Setup Business</a>
+  <a href="#" onclick="showSection('customers')" id="nav-customers">Customers</a>
+  <a href="#" onclick="showSection('send')" id="nav-send">Send Requests</a>
+  <a href="#" onclick="showSection('responder')" id="nav-responder">AI Responder</a>
+  <a href="#" onclick="showSection('history')" id="nav-history">History</a>
+</div>
+
+<div class="main">
+  <!-- Dashboard -->
+  <div class="section active" id="sec-dashboard">
+    <h1>Dashboard</h1>
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card"><div class="stat-value" id="stat-customers">0</div><div class="stat-label">Total Customers</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-requests">0</div><div class="stat-label">Requests Sent</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-recent">0</div><div class="stat-label">Last 7 Days</div></div>
+      <div class="stat-card"><div class="stat-value" id="stat-conversion">0%</div><div class="stat-label">Conversion Rate</div></div>
+    </div>
+    <div class="card">
+      <h3>Quick Actions</h3>
+      <button class="btn btn-primary" onclick="showSection('send')" style="margin-right:8px">Send Review Requests</button>
+      <button class="btn btn-success" onclick="showSection('customers')">Add Customers</button>
+    </div>
+  </div>
+
+  <!-- Setup -->
+  <div class="section" id="sec-setup">
+    <h1>Setup Your Business</h1>
+    <div class="card">
+      <h3>Business Information</h3>
+      <div class="alert alert-info">Enter your business details. You need a Google Place ID to generate review links.</div>
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" id="bizName" placeholder="Joe's Plumbing">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Google Place ID</label>
+          <input type="text" id="bizPlaceId" placeholder="ChIJ...">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" id="bizCategory" placeholder="Plumber">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Business Phone</label>
+          <input type="tel" id="bizPhone" placeholder="(770) 555-1234">
+        </div>
+        <div class="form-group">
+          <label>Business Email</label>
+          <input type="email" id="bizEmail" placeholder="joe@joesplumbing.com">
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="saveBusiness()">Save Business</button>
+    </div>
+  </div>
+
+  <!-- Customers -->
+  <div class="section" id="sec-customers">
+    <h1>Customers</h1>
+    <div class="card">
+      <h3>Add a Customer</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Customer Name</label>
+          <input type="text" id="custName" placeholder="John Smith">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="custPhone" placeholder="(770) 555-5678">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Service Date</label>
+          <input type="date" id="custDate">
+        </div>
+        <div class="form-group">
+          <label>Service Description</label>
+          <input type="text" id="custService" placeholder="Water heater repair">
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addCustomer()">Add Customer</button>
+    </div>
+    <div class="card">
+      <h3>Customer List</h3>
+      <table>
+        <thead><tr><th>Name</th><th>Phone</th><th>Service</th><th>Date</th><th>Action</th></tr></thead>
+        <tbody id="customerTable"><tr><td colspan="5" class="empty">No customers yet</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Send -->
+  <div class="section" id="sec-send">
+    <h1>Send Review Requests</h1>
+    <div class="card">
+      <h3>Message Template</h3>
+      <div class="form-group">
+        <label>Template</label>
+        <select id="templateSelect"></select>
+      </div>
+      <div class="form-group">
+        <label>Preview</label>
+        <div class="response-box" id="templatePreview">Select a template to preview</div>
+      </div>
+      <button class="btn btn-primary" onclick="sendBatch()">Send to All Unsent Customers</button>
+    </div>
+  </div>
+
+  <!-- AI Responder -->
+  <div class="section" id="sec-responder">
+    <h1>AI Review Responder</h1>
+    <div class="card">
+      <h3>Generate a Review Response</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Reviewer Name</label>
+          <input type="text" id="revAuthor" placeholder="Sarah M.">
+        </div>
+        <div class="form-group">
+          <label>Rating</label>
+          <select id="revRating">
+            <option value="5">5 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="2">2 Stars</option>
+            <option value="1">1 Star</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Review Text</label>
+        <textarea id="revText" placeholder="Paste the customer's review here..."></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="generateResponse()">Generate Response</button>
+      <div class="response-box" id="aiResponse" style="display:none; margin-top:16px"></div>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="section" id="sec-history">
+    <h1>Request History</h1>
+    <div class="card">
+      <table>
+        <thead><tr><th>Customer</th><th>Phone</th><th>Channel</th><th>Status</th><th>Sent At</th></tr></thead>
+        <tbody id="historyTable"><tr><td colspan="5" class="empty">No requests yet</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentBiz = null;
+
+  function showSection(name) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+
+    if (name === 'dashboard') loadStats();
+    if (name === 'customers') loadCustomers();
+    if (name === 'history') loadHistory();
+    if (name === 'send') loadTemplates();
+  }
+
+  async function init() {
+    const res = await fetch('/api/businesses');
+    const businesses = await res.json();
+    if (businesses.length > 0) {
+      currentBiz = businesses[0];
+      loadStats();
+    } else {
+      showSection('setup');
+    }
+  }
+
+  async function saveBusiness() {
+    const data = {
+      name: document.getElementById('bizName').value,
+      placeId: document.getElementById('bizPlaceId').value,
+      category: document.getElementById('bizCategory').value,
+      phone: document.getElementById('bizPhone').value,
+      email: document.getElementById('bizEmail').value,
+    };
+    const res = await fetch('/api/businesses', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+    currentBiz = await res.json();
+    alert('Business saved!');
+    showSection('dashboard');
+  }
+
+  async function loadStats() {
+    if (!currentBiz) return;
+    const res = await fetch(`/api/businesses/${currentBiz.id}/stats`);
+    const stats = await res.json();
+    document.getElementById('stat-customers').textContent = stats.totalCustomers;
+    document.getElementById('stat-requests').textContent = stats.totalRequests;
+    document.getElementById('stat-recent').textContent = stats.requestsLast7Days;
+    document.getElementById('stat-conversion').textContent = stats.conversionRate;
+  }
+
+  async function addCustomer() {
+    if (!currentBiz) return alert('Set up your business first');
+    const data = {
+      name: document.getElementById('custName').value,
+      phone: document.getElementById('custPhone').value,
+      serviceDate: document.getElementById('custDate').value,
+      serviceDescription: document.getElementById('custService').value,
+    };
+    await fetch(`/api/businesses/${currentBiz.id}/customers`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+    document.getElementById('custName').value = '';
+    document.getElementById('custPhone').value = '';
+    document.getElementById('custService').value = '';
+    loadCustomers();
+  }
+
+  async function loadCustomers() {
+    if (!currentBiz) return;
+    const res = await fetch(`/api/businesses/${currentBiz.id}/customers`);
+    const customers = await res.json();
+    const tbody = document.getElementById('customerTable');
+    if (customers.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="empty">No customers yet</td></tr>'; return; }
+    tbody.innerHTML = customers.map(c => `
+      <tr>
+        <td>${esc(c.name)}</td>
+        <td>${esc(c.phone || '-')}</td>
+        <td>${esc(c.service_description || '-')}</td>
+        <td>${c.service_date || '-'}</td>
+        <td><button class="btn btn-sm btn-primary" onclick="sendSingle(${c.id})">Send Request</button></td>
+      </tr>
+    `).join('');
+  }
+
+  async function sendSingle(customerId) {
+    const template = document.getElementById('templateSelect')?.value || 'initial_friendly';
+    const res = await fetch(`/api/customers/${customerId}/send-review-request`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ templateId: template })
+    });
+    const result = await res.json();
+    alert(result.status === 'sent' ? 'Review request sent!' : `Failed: ${result.reason || result.error}`);
+  }
+
+  async function sendBatch() {
+    if (!currentBiz) return alert('Set up your business first');
+    const template = document.getElementById('templateSelect')?.value || 'initial_friendly';
+    const res = await fetch(`/api/businesses/${currentBiz.id}/send-batch`, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ templateId: template })
+    });
+    const result = await res.json();
+    alert(`Sent: ${result.sent}, Failed: ${result.failed}`);
+    loadStats();
+  }
+
+  async function loadHistory() {
+    if (!currentBiz) return;
+    const res = await fetch(`/api/businesses/${currentBiz.id}/requests`);
+    const requests = await res.json();
+    const tbody = document.getElementById('historyTable');
+    if (requests.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="empty">No requests yet</td></tr>'; return; }
+    tbody.innerHTML = requests.map(r => `
+      <tr>
+        <td>${esc(r.customer_name)}</td>
+        <td>${esc(r.customer_phone || '-')}</td>
+        <td>${r.channel}</td>
+        <td><span class="badge badge-${r.status}">${r.status}</span></td>
+        <td>${r.sent_at || '-'}</td>
+      </tr>
+    `).join('');
+  }
+
+  async function loadTemplates() {
+    const res = await fetch('/api/templates?channel=sms');
+    const templates = await res.json();
+    const sel = document.getElementById('templateSelect');
+    sel.innerHTML = templates.map(t => `<option value="${t.id}">${t.name} (${t.timing})</option>`).join('');
+    sel.onchange = () => {
+      const t = templates.find(x => x.id === sel.value);
+      document.getElementById('templatePreview').textContent = t?.body || '';
+    };
+    sel.dispatchEvent(new Event('change'));
+  }
+
+  async function generateResponse() {
+    const btn = event.target;
+    btn.disabled = true; btn.textContent = 'Generating...';
+    const data = {
+      businessName: currentBiz?.name || 'Your Business',
+      businessCategory: currentBiz?.category || 'business',
+      reviewAuthor: document.getElementById('revAuthor').value,
+      rating: parseInt(document.getElementById('revRating').value),
+      reviewText: document.getElementById('revText').value,
+    };
+    const res = await fetch('/api/generate-response', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+    const result = await res.json();
+    const box = document.getElementById('aiResponse');
+    box.style.display = 'block';
+    box.textContent = result.response || result.error;
+    btn.disabled = false; btn.textContent = 'Generate Response';
+  }
+
+  function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  init();
+</script>
+</body>
+</html>

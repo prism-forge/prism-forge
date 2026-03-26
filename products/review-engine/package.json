@@ -1,0 +1,21 @@
+{
+  "name": "@prism-forge/review-engine",
+  "version": "1.0.0",
+  "description": "Automated review request and response management for local businesses — SMS/email campaigns with AI-powered review responses",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "send": "node src/cli.js send",
+    "test": "node --test src/**/*.test.js"
+  },
+  "keywords": ["reviews", "google-reviews", "sms", "twilio", "local-business", "smb"],
+  "author": "Prism Forge <hello@prismforge.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {}
+}
