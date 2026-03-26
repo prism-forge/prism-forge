@@ -330,8 +330,9 @@ function generateFindings(scores, data) {
 }
 
 function getCriticalFinding(key, scoreData, data) {
+  const missingFields = Array.isArray(scoreData.details) ? scoreData.details.filter(f => !f.present).map(f => f.name).join(', ') : '';
   const map = {
-    profileCompleteness: `Your profile is missing critical information. ${scoreData.details.filter(f => !f.present).map(f => f.name).join(', ')} need to be added immediately. Incomplete profiles get 60% fewer clicks.`,
+    profileCompleteness: `Your profile is missing critical information. ${missingFields} need to be added immediately. Incomplete profiles get 60% fewer clicks.`,
     reviewHealth: `Your review presence needs urgent attention. ${data.userRatingCount || 0} reviews and a ${data.rating || 0}-star rating puts you behind competitors. Businesses with 50+ reviews generate 266% more revenue.`,
     photoPresence: `Your profile has only ${data.photos?.length || 0} photos. Businesses with 100+ photos get 520% more calls. Add at least 10 high-quality photos of your work, team, and location.`,
     categoryAccuracy: `Your business categories are not properly configured. This directly affects which searches you appear in.`,
@@ -344,8 +345,9 @@ function getCriticalFinding(key, scoreData, data) {
 }
 
 function getWarningFinding(key, scoreData, data) {
+  const missingFields = Array.isArray(scoreData.details) ? scoreData.details.filter(f => !f.present).map(f => f.name).join(', ') : '';
   const map = {
-    profileCompleteness: `Profile is partially complete. Fill in: ${scoreData.details.filter(f => !f.present).map(f => f.name).join(', ')}.`,
+    profileCompleteness: `Profile is partially complete. Fill in: ${missingFields}.`,
     reviewHealth: `Review profile is average. ${data.userRatingCount || 0} reviews is a start, but your competitors likely have more. Implement a review request system.`,
     photoPresence: `${data.photos?.length || 0} photos is below the recommended 10+. Add photos of your work, team, storefront, and products.`,
     categoryAccuracy: `Category setup could be improved. Adding 2-3 relevant secondary categories increases your visibility in related searches.`,
@@ -394,8 +396,9 @@ function generateRecommendations(scores, data) {
 }
 
 function getRecommendation(key, scoreData, data) {
+  const missingFields = Array.isArray(scoreData.details) ? scoreData.details.filter(f => !f.present).map(f => f.name).join(', ') : '';
   const map = {
-    profileCompleteness: `Complete all missing fields: ${scoreData.details.filter(f => !f.present).map(f => f.name).join(', ')}. Each field improves your search visibility.`,
+    profileCompleteness: `Complete all missing fields: ${missingFields}. Each field improves your search visibility.`,
     reviewHealth: data.userRatingCount < 25
       ? `Launch a review request campaign. After each completed job, send a text with your Google review link. Target 5 new reviews per week.`
       : `Continue growing reviews. Respond to every review within 24 hours. Address negative reviews professionally and promptly.`,
