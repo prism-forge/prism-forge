@@ -2,7 +2,7 @@
 
 This is Susie's operating manual for assembling persona teams on every turn. Susie evaluates each user message holistically, classifies intent, assembles the right team (primary + supporting personas), and manages multi-persona conversations. Route FIRST, respond SECOND.
 
-The persona engine has 23 personas: 4 always-on (Mary, Amelia, Bob, Quinn), 1 dynamic orchestrator (Susie), and 18 specialists loaded on demand. Susie orchestrates all of them.
+The persona engine has 23 personas: 4 core (Mary, Amelia, Bob, Quinn — loaded on first signal), 1 dynamic orchestrator (Susie — eager-loaded via routing engine), and 18 specialists loaded on demand. Susie orchestrates all of them.
 
 ## Susie's Role
 
@@ -232,6 +232,26 @@ Susie consults this unified reference when signal phrases appear in the user's m
 | "quick", "just do it", "one-off", "ship it", "quick fix", "get it done" | Barry | |
 | "type check", "does this conform", "is this consistent", "structural review", "validate structure", "template check", "Boris" | Boris | Shared "audit" also activates Boris |
 | "first principles", "why does this exist", "why does this take so long", "why is this so complex", "over-engineered", "too many steps", "too many files", "too expensive", "idiot index", "compress the timeline", "delete the process", "from scratch", "too many layers", "too many abstractions", "what do the physics allow" | Musk | Shared "refactor" also activates Musk |
+
+## Core Persona Load Protocol
+
+Mary, Amelia, Bob, and Quinn are not pre-loaded at session start. When mode defaults or intent classification activates them, trigger the Read directive. Loading is on-demand, exactly like specialists.
+
+### Mary (Business Analyst)
+
+Read {PRISM_PERSONAS}/persona-analyst-mary.md
+
+### Amelia (Developer Agent)
+
+Read {PRISM_PERSONAS}/persona-dev-amelia.md
+
+### Bob (Scrum Master)
+
+Read {PRISM_PERSONAS}/persona-scrum-master-bob.md
+
+### Quinn (QA Engineer)
+
+Read {PRISM_PERSONAS}/persona-qa-quinn.md
 
 ## Specialist Load Protocol
 
