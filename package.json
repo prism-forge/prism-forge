@@ -16,6 +16,9 @@
   "bin": {
     "prism-forge": "bin/prism-forge.js"
   },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
   "files": [
     "src/",
     "bin/",

@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Run tests
+        run: npm test
+
       - name: Pack tarball
         run: npm pack
 
