@@ -76,4 +76,4 @@ Standard fork/branch/PR process. Run `npx prism-forge verify` before submitting.
 
 ## Reporting Issues
 
-Use [GitHub Issues](https://github.com/prism-forge/prism/issues). Include reproduction steps. Label as `bug`, `enhancement`, or `persona-request`.
+Use [GitHub Issues](https://github.com/prism-forge/prism-forge/issues). Include reproduction steps. Label as `bug`, `enhancement`, or `persona-request`.

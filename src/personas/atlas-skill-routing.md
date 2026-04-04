@@ -10,6 +10,8 @@
 
 This document defines the two-layer signal system for routing user messages through Atlas (Growth Strategist) to the correct marketing skill. Atlas is backed by 9 marketing skills at `~/.claude/skills/marketing/`. When Atlas is active (or marketing signals fire), Susie hands the floor to Atlas, who then determines which skill best serves the request.
 
+> **Note:** The marketing skills are optional external additions, not included with PRISM Forge. Atlas activates on marketing signals regardless — the skills enhance his routing when present.
+
 **Signal Types:**
 - **Type A (Direct):** Explicit skill invocation -- user names the skill or its core action
 - **Type B (Pattern+Input):** Natural language patterns that map to skills based on phrasing and context
