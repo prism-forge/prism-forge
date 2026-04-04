@@ -2,7 +2,7 @@
 
 > Human reference document. Not loaded by Claude at runtime.
 > Last updated: 2026-03-19
-> Total: 23 personas (4 always-on + 18 specialists + 1 dynamic orchestrator)
+> Total: 23 personas (4 core + 18 specialists + 1 dynamic orchestrator)
 
 ---
 

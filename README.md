@@ -90,11 +90,13 @@ For deeper technical details, see the [Architecture Guide](docs/architecture.md)
 
 All files are markdown configuration -- no executable code runs after installation. The CLAUDE.md block is delimited with `<!-- PRISM:START -->` / `<!-- PRISM:END -->` markers for clean removal via `npx prism-forge uninstall`.
 
+During upgrades, user-modified files are backed up to `.prism-backup/` before overwriting. The installer also reads `~/.claude/rules/personas/` (read-only) to detect existing non-PRISM persona files and notify you.
+
 ## Personas
 
 ### Core Personas
 
-Activate on first relevant signal — no manual invocation needed:
+Activate on first relevant signal -- no manual invocation needed:
 
 | Name | Role |
 |------|------|
