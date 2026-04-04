@@ -8,13 +8,13 @@
 
 ## How to Use This Manifest
 
-Always-on personas (Mary, Amelia, Bob, Quinn) are preloaded in every Claude Code session via the global CLAUDE.md reference -- they respond without any explicit invocation. Specialist personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive pointing to the persona file. Susie (Chief of Staff) is the dynamic orchestrator -- she activates unconditionally on Turn 1, then evaluates every subsequent message to assemble the right persona team. She classifies user intent, selects primary and supporting personas, and manages multi-persona conversations. The routing engine is Susie's orchestration manual.
+Core personas (Mary, Amelia, Bob, Quinn) activate on first relevant signal via the routing engine -- no manual invocation needed. Specialist personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive pointing to the persona file. Susie (Chief of Staff) is the dynamic orchestrator -- she activates unconditionally on Turn 1, then evaluates every subsequent message to assemble the right persona team. She classifies user intent, selects primary and supporting personas, and manages multi-persona conversations. The routing engine is Susie's orchestration manual.
 
 ---
 
-## Always-On Personas
+## Core Personas
 
-These 4 personas are preloaded in every Claude Code session via the global CLAUDE.md reference.
+These 4 personas activate on first relevant signal — no manual invocation needed.
 
 | Name | Role | File | Mode Default | Key Signals |
 |------|------|------|--------------|-------------|
@@ -35,7 +35,7 @@ These 4 personas are preloaded in every Claude Code session via the global CLAUD
 
 ## Specialist Personas (On-Demand)
 
-These 17 personas are loaded on-demand when Susie determines they are needed based on intent classification, domain matching, and signal detection. The routing engine executes a Read directive to load the persona file.
+These 18 personas are loaded on-demand when Susie determines they are needed based on intent classification, domain matching, and signal detection. The routing engine executes a Read directive to load the persona file.
 
 | Name | Role | File | Trigger Signals |
 |------|------|------|-----------------|

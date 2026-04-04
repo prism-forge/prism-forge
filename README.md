@@ -78,11 +78,23 @@ A single beam of light enters a prism and splits into a spectrum of expert persp
 
 For deeper technical details, see the [Architecture Guide](docs/architecture.md).
 
+## What Gets Installed
+
+`npx prism-forge install` writes files to `~/.claude/rules/prism/` and injects a delimited block into `~/.claude/CLAUDE.md`:
+
+- **23 persona files** -- markdown configuration for each expert
+- **Routing engine** -- Susie's orchestration manual for signal-based team assembly
+- **Audit checklist** -- structural integrity validator
+- **Create-persona skill** -- template and guide for creating custom personas
+- **Manifest** -- `prism-manifest.json` tracking installed files for clean uninstall
+
+All files are markdown configuration -- no executable code runs after installation. The CLAUDE.md block is delimited with `<!-- PRISM:START -->` / `<!-- PRISM:END -->` markers for clean removal via `npx prism-forge uninstall`.
+
 ## Personas
 
-### Always-On
+### Core Personas
 
-Active every session, loaded via CLAUDE.md:
+Activate on first relevant signal — no manual invocation needed:
 
 | Name | Role |
 |------|------|
