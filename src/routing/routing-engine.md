@@ -190,11 +190,15 @@ Susie consults this unified reference when signal phrases appear in the user's m
 | "review" | Quinn + Paige | |
 | "story" | Sophia + Campbell | |
 | "approach" | Bob + Victor | |
-| "design" | Spike + Sally | With architecture/system/pipeline modifier, Winston leads instead |
+| "design" | Spike + Sally | With system/architecture/pipeline/data modifier, Winston leads instead (see Winston specialist signals) |
 | "narrative" | Sophia + John | |
 | "explore" | Mary + Carson | |
 | "arc" | Sophia + Campbell | |
 | "break the pattern" | Dali + de Bono | |
+| "analyze" | Mary | Investigation and fact-finding context |
+| "investigate" | Mary + Quinn | Fact-finding = Mary; testing investigation = Quinn |
+| "build" | Amelia + Bob | Implementation = Amelia; planning around builds = Bob |
+| "test" | Quinn + Dr. Quinn | Validation = Quinn; diagnosing test failures = Dr. Quinn |
 | "validate" | Quinn + Bob | |
 | "troubleshoot" | Quinn + Dr. Quinn | |
 | "audit" | Mary + Quinn + Boris | |
@@ -209,29 +213,33 @@ Susie consults this unified reference when signal phrases appear in the user's m
 | "chart" | Spike + Sophia | |
 | "what if" | Carson + Dali | |
 | "alternative" | de Bono + Carson | |
+| "product" | Jobs + John | Innovation/vision context = Jobs; scope/management context = John |
 
 **Specialist signals** (activate the named specialist):
 
 | Signal | Relevant Persona | Notes |
 |--------|-----------------|-------|
-| "architecture", "system design", "data flow", "source-to-target", "pipeline", "schema" | Winston | |
-| "business value", "stakeholder", "ROI", "deliverable", "monthly report", "why are we doing this" | John | |
-| "document", "Confluence", "field descriptions", "write up", "guide", "spec" | Paige | |
-| "brainstorm", "ideas", "ideate", "brain dump", "possibilities" | Carson | Shared "what if" also activates Carson |
-| "root cause", "stuck", "solve", "diagnose", "blocked", "can't figure out" | Dr. Quinn | With creative modifier and stuck/blocked context, Dr. Quinn leads over Carson |
-| "user perspective", "empathy", "use case", "accessibility", "pain points" | Maya | |
-| "strategy", "better approach", "rethink", "pivot", "is there a better way" | Victor | |
-| "layout", "visual hierarchy", "chart type", "dashboard design", "deck", "visual design" | Spike | |
+| "analyze the problem", "examine", "understand this", "trace", "look into", "what's happening", "what went wrong", "how does this work" | Mary | Shared "analyze", "investigate", "explore", "audit", "assess", "deep dive", "figure out" also activate Mary |
+| "architecture", "system design", "data flow", "source-to-target", "pipeline", "schema", "design the system", "design the architecture", "design the pipeline", "design the infrastructure", "system architecture", "data architecture" | Winston | "design" + system/architecture/pipeline/data/infrastructure modifier = Winston, not Spike+Sally |
+| "business value", "stakeholder", "ROI", "deliverable", "monthly report", "why are we doing this", "prioritize", "deprioritize", "is this worth it" | John | Shared "product" also activates John (scope/management context) |
+| "document", "Confluence", "field descriptions", "write up", "guide", "spec", "explain this", "describe", "clarify", "how does this work" | Paige | "how does this work" shared with Mary -- documentation context = Paige, investigation context = Mary |
+| "brainstorm", "ideas", "ideate", "brain dump", "possibilities", "options", "generate ideas" | Carson | Shared "what if" also activates Carson |
+| "root cause", "stuck", "solve", "diagnose", "blocked", "can't figure out", "why is this failing", "not working" | Dr. Quinn | With creative modifier and stuck/blocked context, Dr. Quinn leads over Carson |
+| "user perspective", "empathy", "use case", "accessibility", "pain points", "who is the user", "user needs" | Maya | |
+| "strategy", "better approach", "rethink", "pivot", "is there a better way", "improve the process", "optimize the process" | Victor | |
+| "layout", "visual hierarchy", "chart type", "dashboard design", "deck", "visual design", "presentation", "slides" | Spike | |
 | "tell the story", "narrative arc", "data story", "frame the metrics", "convey meaning" | Sophia | |
-| "user experience", "UX", "navigation", "intuitive", "confusing", "user flow" | Sally | |
-| "connections", "cross-system", "ecosystem", "end-to-end", "map the system" | Leonardo | |
-| "provoke me", "break my assumptions", "devil's advocate", "flip it", "reverse" | Dali | |
+| "user experience", "UX", "navigation", "intuitive", "confusing", "user flow", "friction", "interaction design" | Sally | |
+| "connections", "cross-system", "ecosystem", "end-to-end", "map the system", "integrate", "systems thinking" | Leonardo | |
+| "provoke me", "break my assumptions", "devil's advocate", "flip it", "reverse", "challenge this", "opposite" | Dali | |
 | "different approaches", "six hats", "thinking hats", "another way", "multiple approaches" | de Bono | |
 | "hero's journey", "through-line", "monomyth", "transformation" | Campbell | Shared "arc" also activates Campbell |
-| "simplify", "intersection", "too complex", "eliminate", "feature creep", "strip it down", "reimagine", "vision", "product thinking", "synthesize", "breakthrough", "transform", "next level", "connect the dots", "what could this become" | Jobs | |
-| "quick", "just do it", "one-off", "ship it", "quick fix", "get it done" | Barry | |
-| "type check", "does this conform", "is this consistent", "structural review", "validate structure", "template check", "Boris" | Boris | Shared "audit" also activates Boris |
-| "first principles", "why does this exist", "why does this take so long", "why is this so complex", "over-engineered", "too many steps", "too many files", "too expensive", "idiot index", "compress the timeline", "delete the process", "from scratch", "too many layers", "too many abstractions", "what do the physics allow" | Musk | Shared "refactor" also activates Musk |
+| "simplify", "intersection", "too complex", "eliminate", "feature creep", "strip it down", "reimagine", "vision", "product thinking", "product", "product innovation", "product vision", "what should this become", "synthesize", "breakthrough", "transform", "next level", "connect the dots", "what could this become" | Jobs | Product innovation/vision context. Shared "product" also activates John (scope context). Do NOT add cutting signals -- that is Musk's lane. |
+| "implement", "build this", "code this", "write the code", "set up", "create the", "make this", "wire up" | Amelia | Shared "build", "refactor" also activate Amelia. Mode default (Agent) is primary activation path. |
+| "test this", "debug", "check this", "verify", "QA", "does this work", "is this right", "run the tests", "pass the tests" | Quinn | Shared "test", "validate", "troubleshoot", "audit" also activate Quinn |
+| "quick", "just do it", "one-off", "ship it", "quick fix", "get it done", "fast", "bang it out" | Barry | |
+| "type check", "does this conform", "is this consistent", "structural review", "validate structure", "template check", "Boris", "consistency check" | Boris | Shared "audit" also activates Boris |
+| "first principles", "why does this exist", "why does this take so long", "why is this so complex", "over-engineered", "too many steps", "too many files", "too expensive", "idiot index", "compress the timeline", "delete the process", "from scratch", "too many layers", "too many abstractions", "what do the physics allow", "waste", "overhead" | Musk | Shared "refactor" also activates Musk. Musk owns the cutting/elimination lane. |
 
 ## Core Persona Load Protocol
 
@@ -262,7 +270,7 @@ When activated -- trigger Read for `{PRISM_PERSONAS}/persona-{slug}.md` -- Activ
 
 ### Winston (Architect)
 
-Signals: architecture, system design, data flow, source-to-target, pipeline, schema
+Signals: architecture, system design, data flow, source-to-target, pipeline, schema, design the system, design the architecture, design the pipeline, design the infrastructure, system architecture, data architecture
 
 Read {PRISM_PERSONAS}/persona-architect-winston.md
 
@@ -270,7 +278,7 @@ Announce if not already active: "**Winston (Architect)** is in the room."
 
 ### John (Product Manager)
 
-Signals: business value, stakeholder, ROI, deliverable, monthly report, why are we doing this
+Signals: business value, stakeholder, ROI, deliverable, monthly report, why are we doing this, prioritize, deprioritize, is this worth it
 
 Read {PRISM_PERSONAS}/persona-pm-john.md
 
@@ -278,7 +286,7 @@ Announce if not already active: "**John (Product Manager)** is in the room."
 
 ### Paige (Technical Writer)
 
-Signals: document, Confluence, field descriptions, write up, guide, spec
+Signals: document, Confluence, field descriptions, write up, guide, spec, explain this, describe, clarify
 
 Read {PRISM_PERSONAS}/persona-tech-writer-paige.md
 
@@ -286,7 +294,7 @@ Announce if not already active: "**Paige (Technical Writer)** is in the room."
 
 ### Carson (Brainstorming Coach)
 
-Signals: brainstorm, ideas, what if, ideate, brain dump, possibilities
+Signals: brainstorm, ideas, what if, ideate, brain dump, possibilities, options, generate ideas
 
 Read {PRISM_PERSONAS}/persona-brainstorm-coach-carson.md
 
@@ -294,7 +302,7 @@ Announce if not already active: "**Carson (Brainstorming Coach)** is in the room
 
 ### Dr. Quinn (Creative Problem Solver)
 
-Signals: root cause, stuck, solve, diagnose, blocked, can't figure out
+Signals: root cause, stuck, solve, diagnose, blocked, can't figure out, why is this failing, not working
 
 Read {PRISM_PERSONAS}/persona-creative-solver-dr-quinn.md
 
@@ -302,7 +310,7 @@ Announce if not already active: "**Dr. Quinn (Creative Problem Solver)** is in t
 
 ### Maya (Design Thinking Coach)
 
-Signals: user perspective, empathy, use case, accessibility, pain points
+Signals: user perspective, empathy, use case, accessibility, pain points, who is the user, user needs
 
 Read {PRISM_PERSONAS}/persona-design-thinking-maya.md
 
@@ -310,7 +318,7 @@ Announce if not already active: "**Maya (Design Thinking Coach)** is in the room
 
 ### Victor (Innovation Strategist)
 
-Signals: strategy, better approach, rethink, pivot, is there a better way
+Signals: strategy, better approach, rethink, pivot, is there a better way, improve the process, optimize the process
 
 Read {PRISM_PERSONAS}/persona-innovator-victor.md
 
@@ -318,7 +326,7 @@ Announce if not already active: "**Victor (Innovation Strategist)** is in the ro
 
 ### Spike (Presentation Master)
 
-Signals: layout, visual hierarchy, chart type, dashboard design, deck, visual design
+Signals: layout, visual hierarchy, chart type, dashboard design, deck, visual design, presentation, slides
 
 Read {PRISM_PERSONAS}/persona-presentation-master-spike.md
 
@@ -334,7 +342,7 @@ Announce if not already active: "**Sophia (Storyteller)** is in the room."
 
 ### Sally (UX Designer)
 
-Signals: user experience, UX, navigation, intuitive, confusing, user flow
+Signals: user experience, UX, navigation, intuitive, confusing, user flow, friction, interaction design
 
 Read {PRISM_PERSONAS}/persona-ux-designer-sally.md
 
@@ -342,7 +350,7 @@ Announce if not already active: "**Sally (UX Designer)** is in the room."
 
 ### Leonardo (Renaissance Polymath)
 
-Signals: connections, cross-system, ecosystem, end-to-end, map the system
+Signals: connections, cross-system, ecosystem, end-to-end, map the system, integrate, systems thinking
 
 Read {PRISM_PERSONAS}/persona-renaissance-polymath-leonardo.md
 
@@ -350,7 +358,7 @@ Announce if not already active: "**Leonardo (Renaissance Polymath)** is in the r
 
 ### Dali (Surrealist Provocateur)
 
-Signals: provoke me, break my assumptions, devil's advocate, flip it, reverse
+Signals: provoke me, break my assumptions, devil's advocate, flip it, reverse, challenge this, opposite
 
 Read {PRISM_PERSONAS}/persona-surrealist-provocateur-dali.md
 
@@ -374,7 +382,7 @@ Announce if not already active: "**Campbell (Mythic Storyteller)** is in the roo
 
 ### Jobs (Combinatorial Genius)
 
-Signals: simplify, intersection, too complex, eliminate, feature creep, strip it down, reimagine, vision, product thinking, synthesize, breakthrough, transform, next level, connect the dots, what could this become
+Signals: simplify, intersection, too complex, eliminate, feature creep, strip it down, reimagine, vision, product thinking, product, product innovation, product vision, what should this become, synthesize, breakthrough, transform, next level, connect the dots, what could this become
 
 Read {PRISM_PERSONAS}/persona-combinatorial-genius-jobs.md
 
@@ -382,7 +390,7 @@ Announce if not already active: "**Jobs (Combinatorial Genius)** is in the room.
 
 ### Barry (Quick Flow Solo Dev)
 
-Signals: quick, just do it, one-off, ship it, quick fix, get it done
+Signals: quick, just do it, one-off, ship it, quick fix, get it done, fast, bang it out
 
 Read {PRISM_PERSONAS}/persona-quick-flow-barry.md
 
@@ -390,7 +398,7 @@ Announce if not already active: "**Barry (Quick Flow Solo Dev)** is in the room.
 
 ### Boris (Type System Auditor)
 
-Signals: audit, type check, does this conform, is this consistent, structural review, validate structure, template check, Boris
+Signals: audit, type check, does this conform, is this consistent, structural review, validate structure, template check, Boris, consistency check
 
 Read {PRISM_PERSONAS}/persona-type-system-auditor-boris.md
 
@@ -398,7 +406,7 @@ Announce if not already active: "**Boris (Type System Auditor)** is in the room.
 
 ### Musk (Radical Reductionist)
 
-Signals: first principles, why does this exist, why does this take so long, why is this so complex, over-engineered, too many steps, too many files, too expensive, idiot index, compress the timeline, delete the process, from scratch, too many layers, too many abstractions, what do the physics allow
+Signals: first principles, why does this exist, why does this take so long, why is this so complex, over-engineered, too many steps, too many files, too expensive, idiot index, compress the timeline, delete the process, from scratch, too many layers, too many abstractions, what do the physics allow, waste, overhead
 
 Read {PRISM_PERSONAS}/persona-first-principles-musk.md
 
