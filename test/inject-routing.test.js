@@ -173,4 +173,49 @@ describe('prism_inject_routing.py', () => {
       assert.match(out.additionalContext, /Paige/);
     });
   });
+
+  describe('Barry signals (git/GitHub/release ops)', () => {
+    it('audit everything should have Boris before Mary in team order', () => {
+      const out = invoke('audit everything');
+      const ac = out.additionalContext;
+      const borisIdx = ac.indexOf('Boris');
+      const maryIdx = ac.indexOf('Mary');
+      assert(borisIdx > -1 && (maryIdx === -1 || borisIdx < maryIdx), 'Boris must precede Mary in audit team');
+    });
+
+    it('audit signal contains Boris', () => {
+      const out = invoke('audit this');
+      assert.match(out.additionalContext, /Boris/);
+    });
+
+    it('fix up github activates Barry', () => {
+      const out = invoke('fix up github');
+      assert.match(out.additionalContext, /Barry/);
+    });
+
+    it('open a PR activates Barry', () => {
+      const out = invoke('open a PR');
+      assert.match(out.additionalContext, /Barry/);
+    });
+
+    it('push the branch activates Barry', () => {
+      const out = invoke('push the branch');
+      assert.match(out.additionalContext, /Barry/);
+    });
+
+    it('npm publish activates Barry', () => {
+      const out = invoke('npm publish');
+      assert.match(out.additionalContext, /Barry/);
+    });
+
+    it('git push origin activates Barry', () => {
+      const out = invoke('git push origin');
+      assert.match(out.additionalContext, /Barry/);
+    });
+
+    it('version bump activates Barry', () => {
+      const out = invoke('version bump');
+      assert.match(out.additionalContext, /Barry/);
+    });
+  });
 });

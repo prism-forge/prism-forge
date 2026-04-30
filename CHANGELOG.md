@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.4] - 2026-04-30
+
+### Changed
+- Reordered the `audit` shared signal so Boris (Type System Auditor) is the primary, with Quinn and Mary supporting. Brings runtime routing into alignment with the routing-engine domain registry which lists Boris as the primary owner for structural validation, template conformance, and drift prevention.
+
+### Added
+- 18 new specialist signals for quick git/GitHub/release operations, all routing to Barry (Quick Flow Solo Dev): push, open a PR, open a pull request, merge the PR, tag and ship, npm publish, fix up github, fix up the repo, fix up the branch, clean up the branch, version bump, git push, git commit, squash merge, cherry-pick, rebase, open an issue, close the PR. Phoenix (Infrastructure Engineer) remains the lead for CI/CD config, deployment pipelines, and operational reliability - not for one-off git ceremony.
+
 ## [2.0.3] - 2026-04-30
 
 ### Fixed

@@ -164,10 +164,11 @@
     {
       "phrase": "audit",
       "activates": [
-        "Mary",
+        "Boris",
         "Quinn",
-        "Boris"
-      ]
+        "Mary"
+      ],
+      "note": "Boris primary for structural/conformance audit. Quinn for behavioral correctness. Mary for fact-gathering context."
     },
     {
       "phrase": "assess",
@@ -1310,6 +1311,96 @@
     {
       "phrase": "collaboration",
       "primary": "Koa"
+    },
+    {
+      "phrase": "push",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "open a pr",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "open a pull request",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "merge the pr",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "tag and ship",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "npm publish",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "fix up github",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "fix up the repo",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "fix up the branch",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "clean up the branch",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "version bump",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "git push",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "git commit",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "squash merge",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "cherry-pick",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "rebase",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "open an issue",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "close the pr",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
     }
   ],
   "intent_classification": [
