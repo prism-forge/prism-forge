@@ -95,7 +95,7 @@ describe('settings-patch', () => {
   });
 
   describe('Install upgrade case', () => {
-    it('allows multiple prism hooks coexist; full upgrade handled via uninstall+reinstall', () => {
+    it('version bump replaces old entry with new entry (dedup by basename)', () => {
       const settingsPath = join(tmpDir, 'settings-upgrade.json');
 
       const oldHook = {
@@ -124,30 +124,22 @@ describe('settings-patch', () => {
       });
       assert.equal(result.added.length, 1);
 
-      // Install new version (no stale removal - both coexist)
+      let settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.SessionStart.length, 1);
+      assert.equal(settings.hooks.SessionStart[0].hooks[0]._prism_v2_marker, 'oldoldol');
+
+      // Install new version (replaces old by basename dedup)
       result = patchSettings({
         action: 'install',
         hooks: [newHook],
         settingsPath,
       });
-      // New version added, old not removed during install
-      assert.equal(result.added.length, 1);
-      assert.equal(result.removed.length, 0, 'Old entry not auto-removed during install');
-
-      let settings = readSettings(settingsPath);
-      assert.equal(settings.hooks.SessionStart.length, 2, 'Both old and new should coexist');
-
-      // Full uninstall removes all prism entries (including both old and new)
-      result = patchSettings({
-        action: 'uninstall',
-        hooks: [oldHook, newHook],  // Uninstall both to completely remove prism hooks
-        settingsPath,
-      });
-      // Each hook in the uninstall list removes all entries with markers (batch remove)
-      assert.equal(result.removed.length >= 2, true, 'Both old and new entries removed');
+      assert.equal(result.added.length, 1, 'New version should be added');
+      assert.equal(result.patched, true, 'Should be patched (replacing old)');
 
       settings = readSettings(settingsPath);
-      assert.equal(settings.hooks.SessionStart.length, 0, 'Should have no entries after full uninstall');
+      assert.equal(settings.hooks.SessionStart.length, 1, 'Should still have exactly 1 entry (replaced, not duplicated)');
+      assert.equal(settings.hooks.SessionStart[0].hooks[0]._prism_v2_marker, 'newhash1', 'Marker should be updated to new version');
     });
   });
 
@@ -313,6 +305,234 @@ describe('settings-patch', () => {
       const content = readFileSync(settingsPath, 'utf-8');
       const parsed = JSON.parse(content);
       assert.deepEqual(parsed, testData);
+    });
+  });
+
+  describe('Install idempotent by script basename (dedup)', () => {
+    it('two consecutive installs with same hook produce only one entry', () => {
+      const settingsPath = join(tmpDir, 'settings-consecutive.json');
+
+      const hook = {
+        name: 'prism_session_start.sh',
+        type: 'SessionStart',
+        extType: 'sh',
+        hash: 'abc123def456789abc123def456789abc123def456789abc123def456789abc1',
+        hash_prefix: 'abc123de',
+        installed_path: '/home/test/.claude/hooks/prism_session_start.sh',
+      };
+
+      // First install
+      patchSettings({
+        action: 'install',
+        hooks: [hook],
+        settingsPath,
+      });
+
+      // Second install (should be no-op)
+      const result = patchSettings({
+        action: 'install',
+        hooks: [hook],
+        settingsPath,
+      });
+
+      assert.equal(result.patched, false, 'Should not patch on duplicate');
+      assert.equal(result.added.length, 0);
+      assert.equal(result.skipped_duplicates.length, 1);
+
+      // Verify exactly one entry exists in settings
+      const settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.SessionStart.length, 1, 'After two identical installs, should have exactly 1 entry (idempotent)');
+    });
+
+    it('prism-forge install can be run multiple times without duplicating hook entries', () => {
+      const settingsPath = join(tmpDir, 'settings-multi-install.json');
+
+      const hooks = [
+        {
+          name: 'prism_session_start.sh',
+          type: 'SessionStart',
+          extType: 'sh',
+          hash: 'abc123def456789abc123def456789abc123def456789abc123def456789abc1',
+          hash_prefix: 'abc123de',
+          installed_path: '/home/test/.claude/hooks/prism_session_start.sh',
+        },
+        {
+          name: 'prism_inject_routing.py',
+          type: 'UserPromptSubmit',
+          extType: 'py',
+          hash: 'def456abc789def456abc789def456abc789def456abc789def456abc789def4',
+          hash_prefix: 'def456ab',
+          installed_path: '/home/test/.claude/hooks/prism_inject_routing.py',
+        },
+      ];
+
+      // First install
+      let result = patchSettings({
+        action: 'install',
+        hooks,
+        settingsPath,
+      });
+      assert.equal(result.added.length, 2, 'First install should add 2 entries');
+
+      // Second install (same hooks)
+      result = patchSettings({
+        action: 'install',
+        hooks,
+        settingsPath,
+      });
+      assert.equal(result.patched, false, 'Second install should not patch');
+      assert.equal(result.added.length, 0);
+      assert.equal(result.skipped_duplicates.length, 2, 'Both hooks should be skipped');
+
+      // Third install (same hooks again)
+      result = patchSettings({
+        action: 'install',
+        hooks,
+        settingsPath,
+      });
+      assert.equal(result.patched, false, 'Third install should not patch');
+      assert.equal(result.added.length, 0);
+      assert.equal(result.skipped_duplicates.length, 2);
+
+      // Verify no duplicates accumulated
+      const settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.SessionStart.length, 1, 'Should have 1 SessionStart entry (not 3)');
+      assert.equal(settings.hooks.UserPromptSubmit.length, 1, 'Should have 1 UserPromptSubmit entry (not 3)');
+    });
+  });
+
+  describe('Dedup by script basename (version bumps)', () => {
+    it('old entry with OLD_HASH marker is replaced by new entry with NEW_HASH marker', () => {
+      const settingsPath = join(tmpDir, 'settings-version-bump.json');
+
+      const oldHook = {
+        name: 'prism_inject_routing.py',
+        type: 'UserPromptSubmit',
+        extType: 'py',
+        hash: 'oldhash1234567890oldhash1234567890oldhash1234567890oldhash123456',
+        hash_prefix: 'oldhasho',
+        installed_path: '/home/test/.claude/hooks/prism_inject_routing.py',
+      };
+
+      const newHook = {
+        name: 'prism_inject_routing.py',
+        type: 'UserPromptSubmit',
+        extType: 'py',
+        hash: 'newhash1234567890newhash1234567890newhash1234567890newhash123456',
+        hash_prefix: 'newhashh',
+        installed_path: '/home/test/.claude/hooks/prism_inject_routing.py',
+      };
+
+      // Install old version
+      let result = patchSettings({
+        action: 'install',
+        hooks: [oldHook],
+        settingsPath,
+      });
+      assert.equal(result.added.length, 1);
+
+      let settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.UserPromptSubmit.length, 1);
+      assert.equal(settings.hooks.UserPromptSubmit[0].hooks[0]._prism_v2_marker, 'oldhasho');
+
+      // Install new version (should replace, not duplicate)
+      result = patchSettings({
+        action: 'install',
+        hooks: [newHook],
+        settingsPath,
+      });
+      assert.equal(result.added.length, 1, 'New version should be added');
+      assert.equal(result.patched, true, 'Should be patched');
+
+      settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.UserPromptSubmit.length, 1, 'Should still have exactly 1 entry (replaced, not duplicated)');
+      assert.equal(settings.hooks.UserPromptSubmit[0].hooks[0]._prism_v2_marker, 'newhashh', 'Marker should be updated to new hash');
+    });
+  });
+
+  describe('Dedup .sh and .py versions', () => {
+    it('.py registration replaces .sh entry when both exist with same basename', () => {
+      const settingsPath = join(tmpDir, 'settings-sh-to-py.json');
+
+      const shHook = {
+        name: 'prism_inject_routing.sh',
+        type: 'UserPromptSubmit',
+        extType: 'sh',
+        hash: 'bashbashbashbashbashbashbashbashbashbashbashbashbashbashbash1',
+        hash_prefix: 'bashbash',
+        installed_path: '/home/test/.claude/hooks/prism_inject_routing.sh',
+      };
+
+      const pyHook = {
+        name: 'prism_inject_routing.py',
+        type: 'UserPromptSubmit',
+        extType: 'py',
+        hash: 'pythonpythonpythonpythonpythonpythonpythonpythonpythonpythonpyt',
+        hash_prefix: 'pythonpy',
+        installed_path: '/home/test/.claude/hooks/prism_inject_routing.py',
+      };
+
+      // Install .sh version first
+      let result = patchSettings({
+        action: 'install',
+        hooks: [shHook],
+        settingsPath,
+      });
+      assert.equal(result.added.length, 1);
+
+      let settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.UserPromptSubmit.length, 1);
+      assert.ok(settings.hooks.UserPromptSubmit[0].hooks[0].command.includes('.sh'));
+
+      // Install .py version (should replace .sh)
+      result = patchSettings({
+        action: 'install',
+        hooks: [pyHook],
+        settingsPath,
+      });
+      assert.equal(result.added.length, 1, 'New .py version should be added');
+      assert.equal(result.patched, true, 'Should be patched');
+
+      settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.UserPromptSubmit.length, 1, 'Should still have exactly 1 entry');
+      assert.ok(settings.hooks.UserPromptSubmit[0].hooks[0].command.includes('.py'), '.sh should be replaced with .py');
+      assert.equal(settings.hooks.UserPromptSubmit[0].hooks[0]._prism_v2_marker, 'pythonpy');
+    });
+  });
+
+  describe('Dedup with five consecutive installs', () => {
+    it('running install 5 times leaves exactly 1 entry per script', () => {
+      const settingsPath = join(tmpDir, 'settings-five-installs.json');
+
+      const hook = {
+        name: 'prism_check_attribution.py',
+        type: 'Stop',
+        extType: 'py',
+        hash: 'abc123def456789abc123def456789abc123def456789abc123def456789abc1',
+        hash_prefix: 'abc123de',
+        installed_path: '/home/test/.claude/hooks/prism_check_attribution.py',
+      };
+
+      for (let i = 1; i <= 5; i++) {
+        const result = patchSettings({
+          action: 'install',
+          hooks: [hook],
+          settingsPath,
+        });
+
+        if (i === 1) {
+          assert.equal(result.added.length, 1, `Install ${i}: should add entry`);
+        } else {
+          assert.equal(result.patched, false, `Install ${i}: should be no-op`);
+          assert.equal(result.added.length, 0, `Install ${i}: should add 0 entries`);
+          assert.equal(result.skipped_duplicates.length, 1, `Install ${i}: should skip 1 duplicate`);
+        }
+      }
+
+      // Verify exactly one entry after 5 installs
+      const settings = readSettings(settingsPath);
+      assert.equal(settings.hooks.Stop.length, 1, 'After 5 installs, should have exactly 1 entry');
+      assert.equal(settings.hooks.Stop[0].hooks[0]._prism_v2_marker, 'abc123de');
     });
   });
 });

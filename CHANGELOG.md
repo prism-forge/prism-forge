@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.3] - 2026-04-30
+
+### Fixed
+- v2.0.2 dedup logic compared by hash_prefix only, missing duplicates with different markers (e.g., across version bumps). Dedup now compares by script basename, treating any prism-managed entry pointing to the same script as the same logical hook.
+- `.sh` wrapper entries are now actively replaced by `.py` entries when both exist, not just skipped at registration time.
+
+## [2.0.2] - 2026-04-30
+
+### Fixed
+- `prism-forge install` was appending duplicate hook entries to `~/.claude/settings.json` on each run instead of deduplicating by hash. Now idempotent - consecutive installs with the same hooks skip duplicate entries.
+- Hook auto-discovery registered both `prism_inject_routing.sh` (wrapper) and `prism_inject_routing.py` (target) in settings.json, causing double-execution per UserPromptSubmit. Now only `.py` is registered in settings when both exist for the same base name; both files are still copied to `~/.claude/hooks/` for availability.
+
+## [2.0.1] - 2026-04-30
+
+### Fixed
+- Drift CLI attribution regex was missing the `:` before closing `**`, causing 100% false-drift reports even when attribution was present.
+- Stop hook substantive regex now uses word boundaries (`\b`) so file paths like `C:/path/to/file` no longer trigger false substantive classification.
+
+### Changed
+- `prism_inject_routing.sh` is now a thin bash wrapper that delegates to `prism_inject_routing.py`. The python implementation reads `signals.json` end-to-end (vs. the previous 8-keyword bash allowlist) and emits routing directives that name the specific persona team.
+- Added `intent_keywords` block to `signals.json` mapping ambiguous phrases to the 9 routing-engine intent categories.
+- UserPromptSubmit hook now always emits a routing directive (no silent `{}`). Cascade: hard overrides → signal scan → intent scan → turn-1 detection → drift fallback → no-signal Susie fallback.
+- Turn-1 detection: hook reads `transcript_path` and forces Susie sitrep when no prior assistant turn exists.
+
+### Added
+- `src/hooks/prism_inject_routing.py` - pure-python deterministic routing classifier.
+- `test/inject-routing.test.js` - table-driven test for ≥20 phrase → expected persona team mappings.
+
 ## [2.0.0] - 2026-04-30 (BREAKING)
 
 ### Added

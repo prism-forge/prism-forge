@@ -1391,5 +1391,17 @@
         "John"
       ]
     }
-  ]
+  ],
+  "intent_keywords": {
+    "build": ["lets do this", "let's do this", "lets build", "let's build", "implement", "ship it", "ship this", "make it", "wire up", "wire this up", "bang it out", "get it done", "knock this out", "do it", "build it"],
+    "investigate": ["looks broken", "is broken", "what's happening", "what is happening", "what went wrong", "trace this", "look into", "dig into", "find out", "isn't working", "is not working", "doesn't work", "does not work"],
+    "plan": ["should we ship", "next step", "next steps", "what's the plan", "what is the plan", "phase this", "sequence this", "break this down", "plan this", "lay it out", "map this out"],
+    "validate": ["is the data right", "is this correct", "is this right", "verify", "double-check", "double check", "make sure", "is this accurate", "sanity check"],
+    "create": ["think out loud", "thinking out loud", "brainstorm", "what if", "possibilities", "options", "spitball", "kick around"],
+    "challenge": ["rework", "this feels off", "feels off", "wrong direction", "rethink", "is this the right", "second-guess", "second guess", "push back", "challenge this"],
+    "orient": ["where are we", "catch me up", "what's left", "what is left", "status", "sitrep", "where do we stand", "remind me", "give me the lay"],
+    "document": ["write up", "document this", "explain this", "describe this", "spec this", "writeup"],
+    "narrate": ["tell the story", "frame this", "frame the", "narrative arc", "the story here"],
+    "refactor": ["clean this up", "clean it up", "tidy up", "i want to clean", "let's clean"]
+  }
 }

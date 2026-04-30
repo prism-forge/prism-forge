@@ -24,7 +24,7 @@ for (const arg of args) {
 }
 
 // Compile regex patterns
-const attributionRegex = /\*\*[A-Z][a-zA-Z\.\s]+\([A-Z][a-zA-Z\s]+\)\*\*/;
+const attributionRegex = /\*\*[A-Z][a-zA-Z. ]+ \([A-Z][a-zA-Z ]+\):\*\*/;
 const substantiveRegex = /\b(recommend|should|would|option|path)\b/i;
 const numberedListRegex = /^\d+\./m;
 const codeBlockRegex = /```/;

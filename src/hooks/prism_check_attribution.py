@@ -46,10 +46,26 @@ def main():
                 for line in f:
                     if not line.strip():
                         continue
-                    msg = json.loads(line)
-                    if msg.get("role") == "assistant":
-                        last_message_text = msg.get("content", "")
-                        turn_count += 1
+                    try:
+                        msg = json.loads(line)
+                    except Exception:
+                        continue
+                    if msg.get("type") != "assistant":
+                        continue
+                    content = msg.get("message", {}).get("content", "")
+                    if isinstance(content, list):
+                        text = " ".join(
+                            c.get("text", "") for c in content
+                            if isinstance(c, dict) and c.get("type") == "text"
+                        )
+                    elif isinstance(content, str):
+                        text = content
+                    else:
+                        text = ""
+                    if not text.strip():
+                        continue
+                    last_message_text = text
+                    turn_count += 1
         except Exception:
             _log_event(session_id, 0, False, None, 0, False, False, "transcript_read_error")
             return
@@ -62,7 +78,7 @@ def main():
         msg_len = len(last_message_text)
         is_substantive = (
             msg_len > 200 or
-            re.search(r"recommend|should|would|option|path", last_message_text, re.IGNORECASE) or
+            re.search(r"\b(recommend|should|would|option|path)\b", last_message_text, re.IGNORECASE) or
             re.search(r"^\d+\.", last_message_text, re.MULTILINE) or
             "```" in last_message_text
         )

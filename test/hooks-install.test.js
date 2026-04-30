@@ -197,4 +197,94 @@ describe('hooks-install', () => {
       assert.notEqual(hash1, hash2, 'Different files should have different hashes');
     });
   });
+
+  describe('Install skips .sh wrapper when matching .py exists', () => {
+    it('copies both .sh and .py but only registers .py in manifest', () => {
+      // Create a separate temp dir for this test
+      const tmpSrcDirPy = mkdtempSync(join(tmpdir(), 'prism-hooks-py-'));
+      const tmpTgtDirPy = mkdtempSync(join(tmpdir(), 'prism-hooks-py-target-'));
+
+      try {
+        // Create both .sh (wrapper) and .py (implementation)
+        writeFileSync(
+          join(tmpSrcDirPy, 'prism_inject_routing.sh'),
+          '#!/bin/bash\nexec python "${0%.sh}.py" "$@"',
+          'utf-8'
+        );
+        writeFileSync(
+          join(tmpSrcDirPy, 'prism_inject_routing.py'),
+          '#!/usr/bin/env python\nprint("routing")',
+          'utf-8'
+        );
+        // Also add a .sh-only hook for comparison
+        writeFileSync(
+          join(tmpSrcDirPy, 'prism_session_start.sh'),
+          '#!/bin/bash\necho "session"',
+          'utf-8'
+        );
+
+        const manifest = installHooks({
+          sourceDir: tmpSrcDirPy,
+          targetDir: tmpTgtDirPy,
+        });
+
+        // Should have 2 manifest entries (.py for inject_routing, .sh for session_start)
+        assert.equal(manifest.length, 2, 'Manifest should have 2 entries (no .sh for inject_routing)');
+
+        // Both files should be copied to target
+        const shPath = join(tmpTgtDirPy, 'prism_inject_routing.sh');
+        const pyPath = join(tmpTgtDirPy, 'prism_inject_routing.py');
+        const sessionPath = join(tmpTgtDirPy, 'prism_session_start.sh');
+
+        assert.equal(existsSync(shPath), true, 'Wrapper .sh should be copied');
+        assert.equal(existsSync(pyPath), true, 'Implementation .py should be copied');
+        assert.equal(existsSync(sessionPath), true, '.sh-only file should be copied');
+
+        // Manifest should contain .py for inject_routing, not .sh
+        const manifestInjectRouting = manifest.find(h => h.type === 'UserPromptSubmit');
+        assert.ok(manifestInjectRouting, 'Should have inject_routing in manifest');
+        assert.equal(manifestInjectRouting.name, 'prism_inject_routing.py', 'Manifest should reference .py');
+        assert.equal(manifestInjectRouting.extType, 'py', 'extType should be py');
+
+        // Manifest should contain .sh for session_start
+        const manifestSessionStart = manifest.find(h => h.type === 'SessionStart');
+        assert.ok(manifestSessionStart, 'Should have session_start in manifest');
+        assert.equal(manifestSessionStart.name, 'prism_session_start.sh', 'Manifest should reference .sh');
+      } finally {
+        rmSync(tmpSrcDirPy, { recursive: true, force: true });
+        rmSync(tmpTgtDirPy, { recursive: true, force: true });
+      }
+    });
+
+    it('registers .sh when .py does not exist', () => {
+      // Create a separate temp dir for this test
+      const tmpSrcDirShOnly = mkdtempSync(join(tmpdir(), 'prism-hooks-sh-only-'));
+      const tmpTgtDirShOnly = mkdtempSync(join(tmpdir(), 'prism-hooks-sh-only-target-'));
+
+      try {
+        // Create only .sh files
+        writeFileSync(
+          join(tmpSrcDirShOnly, 'prism_check_attribution.sh'),
+          '#!/bin/bash\necho "check"',
+          'utf-8'
+        );
+
+        const manifest = installHooks({
+          sourceDir: tmpSrcDirShOnly,
+          targetDir: tmpTgtDirShOnly,
+        });
+
+        // Should have 1 manifest entry for the .sh file
+        assert.equal(manifest.length, 1, 'Manifest should have 1 entry');
+
+        const manifestEntry = manifest[0];
+        assert.equal(manifestEntry.name, 'prism_check_attribution.sh');
+        assert.equal(manifestEntry.extType, 'sh');
+        assert.equal(manifestEntry.type, 'Stop');
+      } finally {
+        rmSync(tmpSrcDirShOnly, { recursive: true, force: true });
+        rmSync(tmpTgtDirShOnly, { recursive: true, force: true });
+      }
+    });
+  });
 });
