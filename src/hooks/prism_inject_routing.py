@@ -66,17 +66,25 @@ def read_input():
 
 
 def check_drift():
+    """Return (is_drift, reason, extra). Walks last 5 events to find most recent drift."""
     try:
         if not EVENTS_LOG.exists():
-            return False
+            return (False, None, None)
         with open(EVENTS_LOG, "r", encoding="utf-8") as f:
             lines = f.readlines()
         if not lines:
-            return False
-        last = json.loads(lines[-1])
-        return bool(last.get("drift", False))
+            return (False, None, None)
+        for line in reversed(lines[-5:]):
+            try:
+                e = json.loads(line)
+            except Exception:
+                continue
+            if e.get("drift"):
+                extra = {"unspoken": e["unspoken"]} if e.get("unspoken") else None
+                return (True, e.get("reason"), extra)
+        return (False, None, None)
     except Exception:
-        return False
+        return (False, None, None)
 
 
 def is_turn_one(transcript_path):
@@ -225,7 +233,16 @@ def turn_one_directive():
     )
 
 
-def drift_directive():
+def drift_directive(reason=None, extra=None):
+    if reason == "announced_unspoken":
+        unspoken = (extra or {}).get("unspoken") or []
+        names = ", ".join(unspoken) if unspoken else "one or more announced personas"
+        return (
+            f"ROUTING DIRECTIVE: Prior turn announced personas that did not speak "
+            f"({names}). Either announce only personas you will draw out, or yield "
+            f"the announcement and let attribution stand alone. "
+            + ATTRIBUTION_REMINDER
+        )
     return (
         "ROUTING DIRECTIVE: Prior turn drift (substantive without attribution). "
         "Susie re-asserts: " + ATTRIBUTION_REMINDER
@@ -272,8 +289,9 @@ def main():
     if is_turn_one(transcript_path):
         emit(turn_one_directive())
 
-    if check_drift():
-        emit(drift_directive())
+    is_drift, drift_reason, drift_extra = check_drift()
+    if is_drift:
+        emit(drift_directive(drift_reason, drift_extra))
 
     emit(fallback_directive())
 

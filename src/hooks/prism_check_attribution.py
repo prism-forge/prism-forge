@@ -110,7 +110,23 @@ def main():
         else:
             reason = "unknown"
 
-        # Log the event
+        # Team-assembly check: announced personas must speak
+        unspoken = _check_announced_unspoken(last_message_text)
+        if unspoken:
+            # Log a separate event for the team-assembly drift
+            _log_event(
+                session_id,
+                turn_count,
+                is_attributed,
+                persona_detected,
+                msg_len,
+                is_substantive,
+                True,
+                "announced_unspoken",
+                extra={"unspoken": sorted(unspoken)}
+            )
+
+        # Log the primary attribution event
         _log_event(
             session_id,
             turn_count,
@@ -132,7 +148,7 @@ def main():
     sys.exit(0)
 
 
-def _log_event(session_id, turn_idx, attributed, persona_detected, response_length, substantive, drift, reason):
+def _log_event(session_id, turn_idx, attributed, persona_detected, response_length, substantive, drift, reason, extra=None):
     """Append JSONL event to prism_routing_events.jsonl"""
     try:
         events_file = os.path.expanduser("~/.claude/hooks/prism_routing_events.jsonl")
@@ -149,12 +165,47 @@ def _log_event(session_id, turn_idx, attributed, persona_detected, response_leng
             "drift": drift,
             "reason": reason
         }
+        if extra:
+            event.update(extra)
 
         with open(events_file, 'a', encoding='utf-8') as f:
             f.write(json.dumps(event) + '\n')
     except Exception:
         # Fail silently
         pass
+
+
+def _check_announced_unspoken(text):
+    """Return set of announced personas not present in attribution blocks.
+    Empty set = no team-assembly drift. Non-empty = announced_unspoken drift."""
+    announced = set()
+    # Pattern 1: **Name (Role)** followed (eventually) by in the room / joining / has entered
+    # Look for roster/party lines that contain multiple **Name (Role)** followed by trigger phrase
+    roster_patterns = [
+        r"(?:^|\n)([^:\n]+?)\s+(?:is in the room|joining|has entered|are in the room)(?:\n|\.)",
+    ]
+    for pattern in roster_patterns:
+        for m in re.finditer(pattern, text, re.IGNORECASE):
+            line = m.group(1)
+            # Extract all bolded names from the line
+            for nm in re.finditer(r"\*\*([A-Z][a-zA-Z. ]+?)(?:\s*\([^)]+\))?\*\*", line):
+                announced.add(nm.group(1).strip())
+
+    # Pattern 2: Roster: / Team: / Personas: line with bolded names
+    for m in re.finditer(
+        r"(?:^|\n)\s*(?:Roster|Team|Personas?(?: on this turn)?)\s*:\s*(.+?)(?:\n|$)",
+        text,
+        re.IGNORECASE
+    ):
+        line = m.group(1)
+        for nm in re.finditer(r"\*\*([A-Z][a-zA-Z. ]+?)(?:\s*\([^)]+\))?\*\*", line):
+            announced.add(nm.group(1).strip())
+    # Spoken = full attribution blocks
+    spoken = {m.group(1).strip() for m in re.finditer(
+        r"\*\*([A-Z][a-zA-Z. ]+?)\s+\([A-Z][a-zA-Z ]+\):\*\*",
+        text
+    )}
+    return announced - spoken
 
 
 if __name__ == "__main__":

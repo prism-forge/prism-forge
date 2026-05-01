@@ -1,6 +1,6 @@
 {
   "name": "prism-forge",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Deterministic persona routing for AI coding assistants. Many minds. No menu.",
   "type": "module",
   "license": "MIT",

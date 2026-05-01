@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.5] - 2026-05-01
+
+### Added
+- Stop hook now detects `announced_unspoken` team-assembly drift: any persona announced via roster line, party-join, or "is in the room" syntax must produce at least one attributed `**Name (Role):**` block in the same turn. Filler announcements log a separate drift event with the unspoken persona names.
+- UserPromptSubmit hook surfaces `announced_unspoken` events on the next turn with a specific corrective directive naming which personas were announced but silent.
+- Drift CLI reports team-assembly metrics: announced count, spoken count, announced-but-silent count, and rate. Distinct from substantive drift rate.
+- routing-engine.md "Announce-then-speak rule" formalized as runtime-enforced.
+
+### Changed
+- `_log_event` in `prism_check_attribution.py` accepts optional `extra` dict merged into the event JSON.
+- `check_drift()` in `prism_inject_routing.py` returns tuple `(is_drift, reason, extra)` enabling reason-specific directives.
+
 ## [2.0.4] - 2026-04-30
 
 ### Changed

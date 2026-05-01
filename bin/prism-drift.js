@@ -95,6 +95,42 @@ function hasAttribution(content) {
   return attributionRegex.test(content);
 }
 
+// Extract announced personas from roster lines and "in the room" patterns
+function extractAnnouncedPersonas(content) {
+  const announced = new Set();
+
+  // Pattern 1: **Name (Role)** is in the room / joining / has entered
+  const inRoomRegex = /\*\*([A-Z][a-zA-Z. ]+?)\s*\([^)]+\)\*\*\s+(?:is in the room|joining|has entered|are in the room)/gi;
+  let match;
+  while ((match = inRoomRegex.exec(content)) !== null) {
+    announced.add(match[1].trim());
+  }
+
+  // Pattern 2: Roster: / Team: / Personas: line with bolded names
+  const rosterRegex = /(?:^|\n)\s*(?:Roster|Team|Personas?(?: on this turn)?)\s*:\s*(.+?)(?:\n|$)/gi;
+  while ((match = rosterRegex.exec(content)) !== null) {
+    const line = match[1];
+    const nameRegex = /\*\*([A-Z][a-zA-Z. ]+?)(?:\s*\([^)]+\))?\*\*/g;
+    let nameMatch;
+    while ((nameMatch = nameRegex.exec(line)) !== null) {
+      announced.add(nameMatch[1].trim());
+    }
+  }
+
+  return announced;
+}
+
+// Extract spoken personas from attribution blocks
+function extractSpokenPersonas(content) {
+  const spoken = new Set();
+  const attributionFullRegex = /\*\*([A-Z][a-zA-Z. ]+?)\s+\([A-Z][a-zA-Z ]+\):\*\*/g;
+  let match;
+  while ((match = attributionFullRegex.exec(content)) !== null) {
+    spoken.add(match[1].trim());
+  }
+  return spoken;
+}
+
 // Main analysis
 const allFiles = findJsonlFiles(source);
 const recentFiles = allFiles.filter(f => isRecentFile(f, since));
@@ -110,6 +146,9 @@ let total = 0;
 let attributed = 0;
 let substantive = 0;
 let subAttributed = 0;
+let announcedCount = 0;
+let spokenCount = 0;
+let announcedUnspokenCount = 0;
 
 for (const filePath of filesToProcess) {
   try {
@@ -136,6 +175,18 @@ for (const filePath of filesToProcess) {
             subAttributed += 1;
           }
         }
+
+        // Team assembly metrics (second pass)
+        const announced = extractAnnouncedPersonas(msgContent);
+        const spoken = extractSpokenPersonas(msgContent);
+        if (announced.size > 0) {
+          announcedCount += announced.size;
+          spokenCount += spoken.size;
+          const unspoken = announced.size - spoken.size;
+          if (unspoken > 0) {
+            announcedUnspokenCount += unspoken;
+          }
+        }
       } catch {
         // Skip malformed JSON lines
       }
@@ -154,6 +205,9 @@ const targetDriftPct = 20.0;
 const deltaFromTarget = driftPct - targetDriftPct;
 const status = driftPct <= targetDriftPct ? 'PASS' : 'FAIL';
 
+// Calculate team assembly metrics
+const announcedUnspokenRate = announcedCount > 0 ? ((announcedUnspokenCount / announcedCount) * 100).toFixed(1) : 0;
+
 if (jsonMode) {
   const output = {
     source,
@@ -168,7 +222,13 @@ if (jsonMode) {
     drift_pct_substantive: parseFloat(driftPct.toFixed(1)),
     target_drift_pct: targetDriftPct,
     status,
-    delta_from_target_pct: parseFloat(deltaFromTarget.toFixed(1))
+    delta_from_target_pct: parseFloat(deltaFromTarget.toFixed(1)),
+    team_assembly: {
+      personas_announced: announcedCount,
+      personas_spoken: spokenCount,
+      announced_but_silent: announcedUnspokenCount,
+      announced_unspoken_rate_pct: parseFloat(announcedUnspokenRate)
+    }
   };
   console.log(JSON.stringify(output, null, 2));
 } else {
@@ -189,6 +249,11 @@ if (jsonMode) {
   console.log(
     `Status: ${status} (baseline ${deltaFromTarget >= 0 ? '+' : ''}${deltaFromTarget.toFixed(1)}%)`
   );
+  console.log();
+  console.log('Team assembly:');
+  console.log(`  Personas announced: ${announcedCount}`);
+  console.log(`  Personas spoken: ${spokenCount}`);
+  console.log(`  Announced but silent: ${announcedUnspokenCount} (rate: ${announcedUnspokenRate}%)`);
 }
 
 process.exit(0);
