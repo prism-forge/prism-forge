@@ -1,0 +1,1498 @@
+{
+  "version": "1.0",
+  "hard_overrides": {
+    "war_room": {
+      "phrase": "war room",
+      "action": "load_all",
+      "case_sensitive": false,
+      "note": "Load all 27 personas when user types 'war room' as standalone phrase"
+    },
+    "explicit_names": {
+      "action": "activate_named",
+      "case_sensitive": false,
+      "names": [
+        "mary",
+        "amelia",
+        "bob",
+        "quinn",
+        "susie",
+        "winston",
+        "john",
+        "paige",
+        "carson",
+        "dr. quinn",
+        "maya",
+        "victor",
+        "spike",
+        "sophia",
+        "sally",
+        "leonardo",
+        "dali",
+        "de bono",
+        "campbell",
+        "jobs",
+        "barry",
+        "boris",
+        "musk",
+        "atlas",
+        "morgan",
+        "sagan",
+        "phoenix",
+        "koa"
+      ]
+    }
+  },
+  "shared_signals": [
+    {
+      "phrase": "requirements",
+      "activates": [
+        "Mary",
+        "John",
+        "Bob"
+      ]
+    },
+    {
+      "phrase": "scope",
+      "activates": [
+        "John",
+        "Bob"
+      ]
+    },
+    {
+      "phrase": "review",
+      "activates": [
+        "Quinn",
+        "Paige"
+      ]
+    },
+    {
+      "phrase": "story",
+      "activates": [
+        "Sophia",
+        "Campbell"
+      ]
+    },
+    {
+      "phrase": "approach",
+      "activates": [
+        "Bob",
+        "Victor"
+      ]
+    },
+    {
+      "phrase": "design",
+      "activates": [
+        "Spike",
+        "Sally"
+      ],
+      "note": "With system/architecture/pipeline/data modifier, Winston leads instead"
+    },
+    {
+      "phrase": "narrative",
+      "activates": [
+        "Sophia",
+        "John"
+      ]
+    },
+    {
+      "phrase": "explore",
+      "activates": [
+        "Mary",
+        "Carson"
+      ]
+    },
+    {
+      "phrase": "arc",
+      "activates": [
+        "Sophia",
+        "Campbell"
+      ]
+    },
+    {
+      "phrase": "break the pattern",
+      "activates": [
+        "Dali",
+        "de Bono"
+      ]
+    },
+    {
+      "phrase": "analyze",
+      "activates": [
+        "Mary",
+        "Sagan"
+      ],
+      "note": "Investigation context = Mary; data/metrics context = Sagan"
+    },
+    {
+      "phrase": "investigate",
+      "activates": [
+        "Mary",
+        "Quinn"
+      ],
+      "note": "Fact-finding = Mary; testing investigation = Quinn"
+    },
+    {
+      "phrase": "build",
+      "activates": [
+        "Amelia",
+        "Bob"
+      ],
+      "note": "Implementation = Amelia; planning around builds = Bob"
+    },
+    {
+      "phrase": "test",
+      "activates": [
+        "Quinn",
+        "Dr. Quinn"
+      ],
+      "note": "Validation = Quinn; diagnosing test failures = Dr. Quinn"
+    },
+    {
+      "phrase": "validate",
+      "activates": [
+        "Quinn",
+        "Bob"
+      ]
+    },
+    {
+      "phrase": "troubleshoot",
+      "activates": [
+        "Quinn",
+        "Dr. Quinn"
+      ]
+    },
+    {
+      "phrase": "audit",
+      "activates": [
+        "Boris",
+        "Quinn",
+        "Mary"
+      ],
+      "note": "Boris primary for structural/conformance audit. Quinn for behavioral correctness. Mary for fact-gathering context."
+    },
+    {
+      "phrase": "assess",
+      "activates": [
+        "Mary",
+        "Bob"
+      ]
+    },
+    {
+      "phrase": "deep dive",
+      "activates": [
+        "Mary",
+        "Winston"
+      ]
+    },
+    {
+      "phrase": "what's the context",
+      "activates": [
+        "Mary",
+        "John"
+      ]
+    },
+    {
+      "phrase": "figure out",
+      "activates": [
+        "Mary",
+        "Dr. Quinn"
+      ]
+    },
+    {
+      "phrase": "refactor",
+      "activates": [
+        "Amelia",
+        "Jobs",
+        "Musk"
+      ]
+    },
+    {
+      "phrase": "roadmap",
+      "activates": [
+        "Bob",
+        "John"
+      ]
+    },
+    {
+      "phrase": "MVP",
+      "activates": [
+        "Barry",
+        "John"
+      ]
+    },
+    {
+      "phrase": "wireframe",
+      "activates": [
+        "Sally",
+        "Spike"
+      ]
+    },
+    {
+      "phrase": "chart",
+      "activates": [
+        "Spike",
+        "Sophia"
+      ]
+    },
+    {
+      "phrase": "what if",
+      "activates": [
+        "Carson",
+        "Dali"
+      ]
+    },
+    {
+      "phrase": "alternative",
+      "activates": [
+        "de Bono",
+        "Carson"
+      ]
+    },
+    {
+      "phrase": "product",
+      "activates": [
+        "Jobs",
+        "John"
+      ],
+      "note": "Innovation/vision context = Jobs; scope/management context = John"
+    }
+  ],
+  "specialist_signals": [
+    {
+      "phrase": "analyze the problem",
+      "primary": "Mary",
+      "note": "Also shared signal 'analyze' co-activates Sagan"
+    },
+    {
+      "phrase": "examine",
+      "primary": "Mary"
+    },
+    {
+      "phrase": "understand this",
+      "primary": "Mary"
+    },
+    {
+      "phrase": "trace",
+      "primary": "Mary"
+    },
+    {
+      "phrase": "look into",
+      "primary": "Mary"
+    },
+    {
+      "phrase": "what's happening",
+      "primary": "Mary"
+    },
+    {
+      "phrase": "what went wrong",
+      "primary": "Mary"
+    },
+    {
+      "phrase": "how does this work",
+      "primary": "Mary",
+      "note": "Shared with Paige - documentation context = Paige, investigation context = Mary"
+    },
+    {
+      "phrase": "architecture",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "system design",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "data flow",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "source-to-target",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "pipeline",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "schema",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "design the system",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "design the architecture",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "design the pipeline",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "design the infrastructure",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "system architecture",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "data architecture",
+      "primary": "Winston"
+    },
+    {
+      "phrase": "business value",
+      "primary": "John"
+    },
+    {
+      "phrase": "stakeholder",
+      "primary": "John"
+    },
+    {
+      "phrase": "ROI",
+      "primary": "John"
+    },
+    {
+      "phrase": "deliverable",
+      "primary": "John"
+    },
+    {
+      "phrase": "monthly report",
+      "primary": "John"
+    },
+    {
+      "phrase": "why are we doing this",
+      "primary": "John"
+    },
+    {
+      "phrase": "prioritize",
+      "primary": "John"
+    },
+    {
+      "phrase": "deprioritize",
+      "primary": "John"
+    },
+    {
+      "phrase": "is this worth it",
+      "primary": "John"
+    },
+    {
+      "phrase": "document",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "Confluence",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "field descriptions",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "write up",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "guide",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "spec",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "explain this",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "describe",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "clarify",
+      "primary": "Paige"
+    },
+    {
+      "phrase": "brainstorm",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "ideas",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "ideate",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "brain dump",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "possibilities",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "options",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "generate ideas",
+      "primary": "Carson"
+    },
+    {
+      "phrase": "root cause",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "stuck",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "solve",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "diagnose",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "blocked",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "can't figure out",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "why is this failing",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "not working",
+      "primary": "Dr. Quinn"
+    },
+    {
+      "phrase": "user perspective",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "empathy",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "use case",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "accessibility",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "pain points",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "who is the user",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "user needs",
+      "primary": "Maya"
+    },
+    {
+      "phrase": "strategy",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "better approach",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "rethink",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "pivot",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "is there a better way",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "improve the process",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "optimize the process",
+      "primary": "Victor"
+    },
+    {
+      "phrase": "layout",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "visual hierarchy",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "chart type",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "dashboard design",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "deck",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "visual design",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "presentation",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "slides",
+      "primary": "Spike"
+    },
+    {
+      "phrase": "tell the story",
+      "primary": "Sophia"
+    },
+    {
+      "phrase": "narrative arc",
+      "primary": "Sophia"
+    },
+    {
+      "phrase": "data story",
+      "primary": "Sophia"
+    },
+    {
+      "phrase": "frame the metrics",
+      "primary": "Sophia"
+    },
+    {
+      "phrase": "convey meaning",
+      "primary": "Sophia"
+    },
+    {
+      "phrase": "user experience",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "UX",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "navigation",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "intuitive",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "confusing",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "user flow",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "friction",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "interaction design",
+      "primary": "Sally"
+    },
+    {
+      "phrase": "connections",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "cross-system",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "ecosystem",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "end-to-end",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "map the system",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "integrate",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "systems thinking",
+      "primary": "Leonardo"
+    },
+    {
+      "phrase": "provoke me",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "break my assumptions",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "devil's advocate",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "flip it",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "reverse",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "challenge this",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "opposite",
+      "primary": "Dali"
+    },
+    {
+      "phrase": "different approaches",
+      "primary": "de Bono"
+    },
+    {
+      "phrase": "six hats",
+      "primary": "de Bono"
+    },
+    {
+      "phrase": "thinking hats",
+      "primary": "de Bono"
+    },
+    {
+      "phrase": "another way",
+      "primary": "de Bono"
+    },
+    {
+      "phrase": "multiple approaches",
+      "primary": "de Bono"
+    },
+    {
+      "phrase": "hero's journey",
+      "primary": "Campbell"
+    },
+    {
+      "phrase": "through-line",
+      "primary": "Campbell"
+    },
+    {
+      "phrase": "monomyth",
+      "primary": "Campbell"
+    },
+    {
+      "phrase": "transformation",
+      "primary": "Campbell"
+    },
+    {
+      "phrase": "simplify",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "intersection",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "too complex",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "eliminate",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "feature creep",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "strip it down",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "reimagine",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "vision",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "product thinking",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "product innovation",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "product vision",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "what should this become",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "synthesize",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "breakthrough",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "transform",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "next level",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "connect the dots",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "what could this become",
+      "primary": "Jobs"
+    },
+    {
+      "phrase": "implement",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "build this",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "code this",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "write the code",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "set up",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "create the",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "make this",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "wire up",
+      "primary": "Amelia"
+    },
+    {
+      "phrase": "test this",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "debug",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "check this",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "verify",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "QA",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "does this work",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "is this right",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "run the tests",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "pass the tests",
+      "primary": "Quinn"
+    },
+    {
+      "phrase": "quick",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "just do it",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "one-off",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "ship it",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "quick fix",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "get it done",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "fast",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "bang it out",
+      "primary": "Barry"
+    },
+    {
+      "phrase": "type check",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "does this conform",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "is this consistent",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "structural review",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "validate structure",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "template check",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "consistency check",
+      "primary": "Boris"
+    },
+    {
+      "phrase": "first principles",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "why does this exist",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "why does this take so long",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "why is this so complex",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "over-engineered",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "too many steps",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "too many files",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "too expensive",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "idiot index",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "compress the timeline",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "delete the process",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "from scratch",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "too many layers",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "too many abstractions",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "what do the physics allow",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "waste",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "overhead",
+      "primary": "Musk"
+    },
+    {
+      "phrase": "marketing",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "growth",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "distribution",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "launch plan",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "content calendar",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "social media strategy",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "SEO",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "go-to-market",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "GTM",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "brand",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "audience",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "followers",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "engagement",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "viral",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "Product Hunt",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "how do I get users",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "nobody knows about this",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "reach",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "awareness",
+      "primary": "Atlas"
+    },
+    {
+      "phrase": "revenue",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "pricing",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "monetization",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "financial model",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "cash flow",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "P&L",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "unit economics",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "runway",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "burn rate",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "margin",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "cost structure",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "how do we make money",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "what should we charge",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "pricing strategy",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "ROI model",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "money",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "financial",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "economics",
+      "primary": "Morgan"
+    },
+    {
+      "phrase": "dashboard",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "data pipeline",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "metrics",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "KPI",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "analytics",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "data model",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "ETL",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "data warehouse",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "business intelligence",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "BI",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "visualization",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "tracking",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "funnel analysis",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "cohort",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "A/B test results",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "data-driven",
+      "primary": "Sagan"
+    },
+    {
+      "phrase": "deploy",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "CI/CD",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "Docker",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "Kubernetes",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "infrastructure",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "uptime",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "monitoring",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "scaling",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "load balancer",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "server",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "cloud",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "AWS",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "GCP",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "terraform",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "DevOps",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "production down",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "incident",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "reliability",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "operations",
+      "primary": "Phoenix"
+    },
+    {
+      "phrase": "community",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "DevRel",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "developer relations",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "partnerships",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "ecosystem",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "contributors",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "Discord",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "open source community",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "developer experience",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "DX",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "onboarding contributors",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "sponsorship",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "collaboration",
+      "primary": "Koa"
+    },
+    {
+      "phrase": "push",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "open a pr",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "open a pull request",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "merge the pr",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "tag and ship",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "npm publish",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "fix up github",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "fix up the repo",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "fix up the branch",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "clean up the branch",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "version bump",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "git push",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "git commit",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "squash merge",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "cherry-pick",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "rebase",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "open an issue",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    },
+    {
+      "phrase": "close the pr",
+      "primary": "Barry",
+      "note": "Quick git/GitHub/release ops route to Barry, not Phoenix."
+    }
+  ],
+  "intent_classification": [
+    {
+      "intent": "build",
+      "primary": "Amelia",
+      "supporting": [
+        "Barry",
+        "Quinn"
+      ]
+    },
+    {
+      "intent": "investigate",
+      "primary": "Mary",
+      "supporting": [
+        "Winston",
+        "Leonardo"
+      ]
+    },
+    {
+      "intent": "plan",
+      "primary": [
+        "Bob",
+        "John"
+      ],
+      "supporting": [
+        "Victor",
+        "de Bono"
+      ]
+    },
+    {
+      "intent": "validate",
+      "primary": "Quinn",
+      "supporting": [
+        "Boris",
+        "Dr. Quinn"
+      ]
+    },
+    {
+      "intent": "create",
+      "primary": "Carson",
+      "supporting": [
+        "Dali",
+        "Maya"
+      ]
+    },
+    {
+      "intent": "challenge",
+      "primary": [
+        "Victor",
+        "Jobs"
+      ],
+      "supporting": [
+        "Dali",
+        "de Bono"
+      ]
+    },
+    {
+      "intent": "orient",
+      "primary": "Susie",
+      "supporting": [
+        "Mary",
+        "Bob"
+      ]
+    },
+    {
+      "intent": "document",
+      "primary": "Paige",
+      "supporting": [
+        "Spike",
+        "Sophia"
+      ]
+    },
+    {
+      "intent": "narrate",
+      "primary": "Sophia",
+      "supporting": [
+        "Campbell",
+        "John"
+      ]
+    }
+  ],
+  "intent_keywords": {
+    "build": ["lets do this", "let's do this", "lets build", "let's build", "implement", "ship it", "ship this", "make it", "wire up", "wire this up", "bang it out", "get it done", "knock this out", "do it", "build it"],
+    "investigate": ["looks broken", "is broken", "what's happening", "what is happening", "what went wrong", "trace this", "look into", "dig into", "find out", "isn't working", "is not working", "doesn't work", "does not work"],
+    "plan": ["should we ship", "next step", "next steps", "what's the plan", "what is the plan", "phase this", "sequence this", "break this down", "plan this", "lay it out", "map this out"],
+    "validate": ["is the data right", "is this correct", "is this right", "verify", "double-check", "double check", "make sure", "is this accurate", "sanity check"],
+    "create": ["think out loud", "thinking out loud", "brainstorm", "what if", "possibilities", "options", "spitball", "kick around"],
+    "challenge": ["rework", "this feels off", "feels off", "wrong direction", "rethink", "is this the right", "second-guess", "second guess", "push back", "challenge this"],
+    "orient": ["where are we", "catch me up", "what's left", "what is left", "status", "sitrep", "where do we stand", "remind me", "give me the lay"],
+    "document": ["write up", "document this", "explain this", "describe this", "spec this", "writeup"],
+    "narrate": ["tell the story", "frame this", "frame the", "narrative arc", "the story here"],
+    "refactor": ["clean this up", "clean it up", "tidy up", "i want to clean", "let's clean"]
+  }
+}

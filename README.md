@@ -78,6 +78,28 @@ A single beam of light enters a prism and splits into a spectrum of expert persp
 
 For deeper technical details, see the [Architecture Guide](docs/architecture.md).
 
+## Runtime enforcement (v2.0+)
+
+prism v2.0 ships hooks that enforce persona routing at runtime. On install, three hooks are added to `~/.claude/hooks/` and registered in `~/.claude/settings.json`:
+
+| Hook | Event | Purpose |
+|------|-------|---------|
+| `prism_session_start.sh` | SessionStart | Inject Turn 1 routing contract |
+| `prism_inject_routing.sh` | UserPromptSubmit | Activate persona based on signals (war room, names, intent keywords) |
+| `prism_check_attribution.py` | Stop | Log drift events to `~/.claude/hooks/prism_routing_events.jsonl` |
+
+### Drift telemetry
+
+Measure attribution rate before and after install:
+
+```bash
+npx prism-forge drift --since=7
+# or JSON output for scripts:
+npx prism-forge drift --since=7 --json
+```
+
+Target: less than 20% drift on substantive turns (turns longer than 200 chars or containing recommendations / options / judgment calls).
+
 ## What Gets Installed
 
 `npx prism-forge install` writes files to `~/.claude/rules/prism/` and injects a delimited block into `~/.claude/CLAUDE.md`:
