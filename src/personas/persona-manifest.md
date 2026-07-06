@@ -1,20 +1,20 @@
 # Persona Manifest
 
 > Human reference document. Not loaded by Claude at runtime.
-> Last updated: 2026-03-19
-> Total: 23 personas (4 core + 18 specialists + 1 dynamic orchestrator)
+> Last updated: 2026-07-06
+> Total: 28 personas (4 core + 23 specialists + 1 dynamic orchestrator)
 
 ---
 
 ## How to Use This Manifest
 
-Core personas (Mary, Amelia, Bob, Quinn) activate on first relevant signal via the routing engine -- no manual invocation needed. Specialist personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive pointing to the persona file. Susie (Chief of Staff) is the dynamic orchestrator -- she activates unconditionally on Turn 1, then evaluates every subsequent message to assemble the right persona team. She classifies user intent, selects primary and supporting personas, and manages multi-persona conversations. The routing engine is Susie's orchestration manual.
+Core personas (Mary, Amelia, Bob, Quinn) activate on first relevant signal via the routing engine - no manual invocation needed. Specialist personas are loaded on-demand when routing-engine.md detects their trigger signals and executes a Read directive pointing to the persona file. Susie (Chief of Staff) is the dynamic orchestrator - she activates unconditionally on Turn 1, then evaluates every subsequent message to assemble the right persona team. She classifies user intent, selects primary and supporting personas, and manages multi-persona conversations. The routing engine is Susie's orchestration manual.
 
 ---
 
 ## Core Personas
 
-These 4 personas activate on first relevant signal — no manual invocation needed.
+These 4 personas activate on first relevant signal - no manual invocation needed.
 
 | Name | Role | File | Mode Default | Key Signals |
 |------|------|------|--------------|-------------|
@@ -35,7 +35,7 @@ These 4 personas activate on first relevant signal — no manual invocation need
 
 ## Specialist Personas (On-Demand)
 
-These 18 personas are loaded on-demand when Susie determines they are needed based on intent classification, domain matching, and signal detection. The routing engine executes a Read directive to load the persona file.
+These 23 personas are loaded on-demand when Susie determines they are needed based on intent classification, domain matching, and signal detection. The routing engine executes a Read directive to load the persona file.
 
 | Name | Role | File | Trigger Signals |
 |------|------|------|-----------------|
@@ -57,6 +57,11 @@ These 18 personas are loaded on-demand when Susie determines they are needed bas
 | Barry | Quick Flow Solo Dev | persona-quick-flow-barry.md | quick, just do it, one-off, ship it, quick fix, get it done |
 | Boris | Type System Auditor | persona-type-system-auditor-boris.md | audit, type check, does this conform, is this consistent, structural review, validate structure, template check, Boris |
 | Musk | Radical Reductionist | persona-first-principles-musk.md | first principles, why does this exist, why does this take so long, why is this so complex, over-engineered, too many steps, too many files, too expensive, idiot index, compress the timeline, delete the process, from scratch, too many layers, too many abstractions, what do the physics allow |
+| Atlas | Growth Strategist | persona-growth-strategist-atlas.md | marketing, growth, distribution, launch plan, content calendar, social media strategy, SEO, go-to-market, GTM, brand, audience, followers, engagement, viral, Product Hunt, how do I get users, nobody knows about this |
+| Morgan | Financial Strategist | persona-financial-strategist-morgan.md | revenue, pricing, monetization, financial model, cash flow, P&L, unit economics, runway, burn rate, margin, cost structure, how do we make money, what should we charge, pricing strategy, ROI model |
+| Sagan | Data Strategist | persona-data-strategist-sagan.md | dashboard, data pipeline, metrics, KPI, analytics, data model, ETL, data warehouse, business intelligence, BI, visualization, tracking, funnel analysis, cohort, A/B test results |
+| Phoenix | Infrastructure Engineer | persona-infrastructure-engineer-phoenix.md | deploy, CI/CD, Docker, Kubernetes, infrastructure, uptime, monitoring, scaling, load balancer, server, cloud, AWS, GCP, terraform, DevOps, production down, incident |
+| Koa | Community Architect | persona-community-architect-koa.md | community, DevRel, developer relations, partnerships, ecosystem, contributors, Discord, open source community, developer experience, DX, onboarding contributors, sponsorship |
 
 ---
 
@@ -76,25 +81,25 @@ Susie consults this registry when evaluating user intent. It is a reference guid
 | Challenging value, scoping, or prioritizing | John | Bob (if task impact) | Scope validation, ROI assessment |
 | Designing visual layout or presentation | Spike | Sally (UX flow) | Visual hierarchy, dashboard, deck |
 | Designing user experience or interaction flow | Sally | Maya (empathy) | Navigation, user flow, intuitiveness |
-| Designing system or data architecture | Winston | -- | Infrastructure, data model, schema |
-| Writing documentation or descriptions | Paige | -- | Confluence, specs, guides |
+| Designing system or data architecture | Winston | - | Infrastructure, data model, schema |
+| Writing documentation or descriptions | Paige | - | Confluence, specs, guides |
 | Brainstorming/ideation/divergent thinking | Carson | Dali (if provoking) | Idea generation, exploration |
-| Creative problem-solving on stuck issues | Dr. Quinn | -- | Root cause, unblock, alternative approaches |
-| Simplifying/cutting/reducing complexity | Jobs | -- | Feature creep, intersection thinking, reduction |
+| Creative problem-solving on stuck issues | Dr. Quinn | - | Root cause, unblock, alternative approaches |
+| Simplifying/cutting/reducing complexity | Jobs | - | Feature creep, intersection thinking, reduction |
 | Framing a narrative or data story | Sophia | Campbell (if journey) | Story arc, metrics narrative, meaning |
 | Challenging assumptions or inverting defaults | Dali | de Bono (if structured) | Provocation, reversal, assumption inversion |
-| Strategic rethinking or process improvement | Victor | -- | Approach rethinking, process redesign |
-| Quick one-off execution, minimal ceremony | Barry | -- | Fast builds, MVP-quick execution |
-| Cross-system connections or holistic mapping | Leonardo | -- | End-to-end view, ecosystem connections |
+| Strategic rethinking or process improvement | Victor | - | Approach rethinking, process redesign |
+| Quick one-off execution, minimal ceremony | Barry | - | Fast builds, MVP-quick execution |
+| Cross-system connections or holistic mapping | Leonardo | - | End-to-end view, ecosystem connections |
 | User empathy or persona-based thinking | Maya | Sally | User perspective, accessibility, pain points |
-| Lateral thinking or structured alternatives | de Bono | -- | Six thinking hats, alternative generation |
+| Lateral thinking or structured alternatives | de Bono | - | Six thinking hats, alternative generation |
 | Mythic/journey/arc framing | Campbell | Sophia | Hero's journey, monomyth, arc narrative |
 | Structural validation, template conformance, drift prevention | Boris | Quinn (if correctness), Mary (if audit) | Type checking, conformance, template alignment |
 | Orientation, triage, session startup, state awareness | Susie | Mary (if analysis needed), Bob (if planning needed) | Sitrep, context synthesis, where we are |
 
 ### Shared Signals
 
-Signal phrases that inform Susie's team assembly. When a signal appears, listed personas are RELEVANT -- Susie decides which to activate based on full message context.
+Signal phrases that inform Susie's team assembly. When a signal appears, listed personas are RELEVANT - Susie decides which to activate based on full message context.
 
 | Signal | Relevant Personas |
 |--------|-------------------|
@@ -141,7 +146,7 @@ Susie evaluates each message and assembles the right team. Common patterns:
 | "Does this conform to the template?" | Boris (Type System Auditor) |
 | "What's the user experience here?" | Sally (UX Designer) + Maya (Design Thinking Coach) |
 | "What's the business case?" | John (Product Manager) |
-| Start of a new session | Susie (Chief of Staff) -- unconditional on Turn 1 |
+| Start of a new session | Susie (Chief of Staff) - unconditional on Turn 1 |
 | "Plan how to refactor the auth module" | Bob (lead) + Jobs + Victor + Amelia (Susie assembles multi-persona team) |
 
 ---

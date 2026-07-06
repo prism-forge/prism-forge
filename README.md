@@ -12,7 +12,7 @@
 
 <h3 align="center">Many minds. No menu.</h3>
 
-PRISM Forge is a deterministic persona routing system for Claude Code. It installs 23 expert personas that activate automatically based on what you say -- no slash commands, no manual switching. Write naturally and the right expert responds.
+PRISM Forge is a deterministic persona routing system for Claude Code. It installs 28 expert personas that activate automatically based on what you say - no slash commands, no manual switching. Write naturally and the right expert responds.
 
 ## Why PRISM Forge?
 
@@ -20,11 +20,11 @@ PRISM Forge is a deterministic persona routing system for Claude Code. It instal
 
 **The solution:** PRISM Forge installs a signal-based routing engine that reads your intent from every message and activates the right persona automatically. Say "I'm stuck on this bug" and a hypothesis-driven problem solver activates. Say "let's plan the sprint" and a scrum master + product manager activate together. No configuration required.
 
-- **23 expert personas** covering analysis, architecture, development, QA, design, strategy, and more
-- **Zero-config activation** -- install once, works immediately in every Claude Code session
-- **Signal-based routing** -- personas activate based on what you say, not what you ask for
-- **Dynamic orchestration** -- Susie (Chief of Staff) assembles the right persona team per context
-- **Works with any Claude Code project** -- no per-project setup needed
+- **28 expert personas** covering analysis, architecture, development, QA, design, strategy, growth, and operations
+- **Zero-config activation** - install once, works immediately in every Claude Code session
+- **Signal-based routing** - personas activate based on what you say, not what you ask for
+- **Dynamic orchestration** - Susie (Chief of Staff) assembles the right persona team per context
+- **Works with any Claude Code project** - no per-project setup needed
 
 ## Quick Start
 
@@ -55,22 +55,22 @@ A single beam of light enters a prism and splits into a spectrum of expert persp
 1. You send a message
 2. Susie (the dynamic orchestrator) evaluates your intent
 3. She classifies the domain and detects signal phrases
-4. She assembles a persona team -- a primary expert plus relevant supporting perspectives
+4. She assembles a persona team - a primary expert plus relevant supporting perspectives
 5. The response comes through the activated persona's lens
 
 **Examples:**
 
-> **You:** "I'm stuck on this auth bug -- tokens keep expiring early"
+> **You:** "I'm stuck on this auth bug - tokens keep expiring early"
 >
-> **Dr. Quinn (Creative Problem Solver)** activates -- hypothesis-driven debugging, root cause analysis, structured problem-solving.
+> **Dr. Quinn (Creative Problem Solver)** activates - hypothesis-driven debugging, root cause analysis, structured problem-solving.
 
 > **You:** "Let's plan the next sprint"
 >
-> **Bob (Scrum Master) + John (Product Manager)** activate together -- John challenges scope and business value first, then Bob structures the tasks.
+> **Bob (Scrum Master) + John (Product Manager)** activate together - John challenges scope and business value first, then Bob structures the tasks.
 
-> **You:** "Simplify this -- too many abstractions"
+> **You:** "Simplify this - too many abstractions"
 >
-> **Jobs (Combinatorial Genius) + Musk (Radical Reductionist)** activate -- ruthless reduction from two angles: combinatorial synthesis and first-principles engineering.
+> **Jobs (Combinatorial Genius) + Musk (Radical Reductionist)** activate - ruthless reduction from two angles: combinatorial synthesis and first-principles engineering.
 
 **Shared signals** activate multiple personas simultaneously. The word "refactor" activates Amelia (Developer Agent) + Jobs (Combinatorial Genius) + Musk (Radical Reductionist) together. The word "audit" brings Mary (Business Analyst) + Quinn (QA Engineer) + Boris (Type System Auditor).
 
@@ -104,13 +104,13 @@ Target: less than 20% drift on substantive turns (turns longer than 200 chars or
 
 `npx prism-forge install` writes files to `~/.claude/rules/prism/` and injects a delimited block into `~/.claude/CLAUDE.md`:
 
-- **23 persona files** -- markdown configuration for each expert
-- **Routing engine** -- Susie's orchestration manual for signal-based team assembly
-- **Audit checklist** -- structural integrity validator
-- **Create-persona skill** -- template and guide for creating custom personas
-- **Manifest** -- `prism-manifest.json` tracking installed files for clean uninstall
+- **28 persona files** - markdown configuration for each expert
+- **Routing engine** - Susie's orchestration manual for signal-based team assembly
+- **Audit checklist** - structural integrity validator
+- **Create-persona skill** - template and guide for creating custom personas
+- **Manifest** - `prism-manifest.json` tracking installed files for clean uninstall
 
-All files are markdown configuration -- no executable code runs after installation. The CLAUDE.md block is delimited with `<!-- PRISM:START -->` / `<!-- PRISM:END -->` markers for clean removal via `npx prism-forge uninstall`.
+All files are markdown configuration - no executable code runs after installation. The CLAUDE.md block is delimited with `<!-- PRISM:START -->` / `<!-- PRISM:END -->` markers for clean removal via `npx prism-forge uninstall`.
 
 During upgrades, user-modified files are backed up to `.prism-backup/` before overwriting. The installer also reads `~/.claude/rules/personas/` (read-only) to detect existing non-PRISM persona files and notify you.
 
@@ -118,7 +118,7 @@ During upgrades, user-modified files are backed up to `.prism-backup/` before ov
 
 ### Core Personas
 
-Activate on first relevant signal -- no manual invocation needed:
+Activate on first relevant signal - no manual invocation needed:
 
 | Name | Role |
 |------|------|
@@ -135,7 +135,7 @@ Activate on first relevant signal -- no manual invocation needed:
 
 ### Specialists
 
-Activate on signal -- loaded on-demand by Susie when needed:
+Activate on signal - loaded on-demand by Susie when needed:
 
 | Name | Role |
 |------|------|
@@ -157,35 +157,40 @@ Activate on signal -- loaded on-demand by Susie when needed:
 | Barry | Quick Flow Solo Dev |
 | Boris | Type System Auditor |
 | Musk | Radical Reductionist |
+| Atlas | Growth Strategist |
+| Morgan | Financial Strategist |
+| Sagan | Data Strategist |
+| Phoenix | Infrastructure Engineer |
+| Koa | Community Architect |
 
 ## Documentation
 
-- [Architecture Guide](docs/architecture.md) -- How the routing engine and persona system work
-- [Signal Reference](docs/signals.md) -- Complete signal tables and routing behavior
-- [Customization Guide](docs/customization.md) -- Creating your own personas
-- [Contributing](CONTRIBUTING.md) -- How to contribute personas and code
-- [Changelog](CHANGELOG.md) -- Version history
+- [Architecture Guide](docs/architecture.md) - How the routing engine and persona system work
+- [Signal Reference](docs/signals.md) - Complete signal tables and routing behavior
+- [Customization Guide](docs/customization.md) - Creating your own personas
+- [Contributing](CONTRIBUTING.md) - How to contribute personas and code
+- [Changelog](CHANGELOG.md) - Version history
 
 ## Community and Support
 
-- [GitHub Issues](https://github.com/prism-forge/prism-forge/issues) -- Bug reports and feature requests
-- [GitHub Discussions](https://github.com/prism-forge/prism-forge/discussions) -- Questions and community conversation
-- [Bluesky](https://bsky.app/profile/drakkotarkin.bsky.social) -- Follow for updates and dev community discussion
-- [Twitter/X](https://twitter.com/drakkotarkin) -- Threads and announcements
-- [LinkedIn](https://www.linkedin.com/in/anthonyjhipp) -- Professional updates from the creator
+- [GitHub Issues](https://github.com/prism-forge/prism-forge/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/prism-forge/prism-forge/discussions) - Questions and community conversation
+- [Bluesky](https://bsky.app/profile/drakkotarkin.bsky.social) - Follow for updates and dev community discussion
+- [Twitter/X](https://twitter.com/drakkotarkin) - Threads and announcements
+- [LinkedIn](https://www.linkedin.com/in/anthonyjhipp) - Professional updates from the creator
 
 ## Contributing
 
-PRISM Forge welcomes contributions -- especially new personas that fill domain gaps in the routing engine. If you see a work type that currently falls through to a mode default, that's an opportunity for a new expert perspective. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution guide, including the persona creation process and PR checklist.
+PRISM Forge welcomes contributions - especially new personas that fill domain gaps in the routing engine. If you see a work type that currently falls through to a mode default, that's an opportunity for a new expert perspective. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution guide, including the persona creation process and PR checklist.
 
 ## License
 
-MIT License -- see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 Copyright (c) 2025 BMad Code, LLC / Copyright (c) 2026 Anthony Hipp
 
 ## Credits
 
-PRISM Forge is derived from [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), originally created by BMad Code, LLC and licensed under the MIT License. PRISM Forge is an independent project -- not affiliated with, endorsed by, or sponsored by BMad Code, LLC.
+PRISM Forge is derived from [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD), originally created by BMad Code, LLC and licensed under the MIT License. PRISM Forge is an independent project - not affiliated with, endorsed by, or sponsored by BMad Code, LLC.
 
 "BMad", "BMad Method", and "BMad Core" are trademarks of BMad Code, LLC. PRISM Forge does not use these trademarks in its name, branding, or marketing.

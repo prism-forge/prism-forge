@@ -2,38 +2,38 @@
 
 ## Overview
 
-PRISM Forge is a persona routing system for Claude Code. It installs 23 expert personas and a routing engine that activates the right persona on every turn based on signal detection. No configuration, no slash commands -- just natural conversation.
+PRISM Forge is a persona routing system for Claude Code. It installs 28 expert personas and a routing engine that activates the right persona on every turn based on signal detection. No configuration, no slash commands - just natural conversation.
 
 The system is built on a simple premise: your words reveal your intent. When you say "I'm stuck," that signals a need for creative problem-solving. When you say "let's plan," that signals a need for task structuring. PRISM Forge detects these signals and activates the right expert automatically.
 
 ## System Components
 
-### Persona Files (23 .md files)
+### Persona Files (28 .md files)
 
 Each persona has 5 sections:
 
-1. **Identity** -- Background, expertise, what makes them unique
-2. **Communication Style** -- Tone, energy, speaking patterns
-3. **Principles** -- Core beliefs and methodologies
-4. **Domain Application** -- How they apply their lens to user work
-5. **Signals** -- Mode default, domain registry row, shared signals, supporting relationships
+1. **Identity** - Background, expertise, what makes them unique
+2. **Communication Style** - Tone, energy, speaking patterns
+3. **Principles** - Core beliefs and methodologies
+4. **Domain Application** - How they apply their lens to user work
+5. **Signals** - Mode default, domain registry row, shared signals, supporting relationships
 
 Personas are categorized into three groups:
 
 - **Always-on (4):** Loaded every session via CLAUDE.md Read directives
 - **Dynamic orchestrator (1):** Susie, referenced in the routing engine
-- **Specialists (18):** Loaded on-demand when Susie determines they are needed
+- **Specialists (23):** Loaded on-demand when Susie determines they are needed
 
 ### Routing Engine (routing-engine.md)
 
 Susie's orchestration manual. Contains:
 
-- **Domain Registry** -- 23 rows mapping work types to persona owners (primary + supporting)
-- **Signal Guide** -- 24 shared signals and 18 specialist signals that inform team assembly
-- **Intent Classification** -- 9 intent categories (Build, Investigate, Plan, Validate, Create, Challenge, Orient, Document, Narrate) with typical persona teams
-- **Team Assembly Protocol** -- How Susie builds a team: primary leads, supporting personas earn their seat
-- **Specialist Load Protocol** -- Deterministic Read directives for loading specialist persona files
-- **Conversation Management** -- Patterns for multi-persona responses: disagreement, concession, build-on, sequential contribution, convergence summary
+- **Domain Registry** - 28 rows mapping work types to persona owners (primary + supporting)
+- **Signal Guide** - 24 shared signals and 23 specialist signals that inform team assembly
+- **Intent Classification** - 9 intent categories (Build, Investigate, Plan, Validate, Create, Challenge, Orient, Document, Narrate) with typical persona teams
+- **Team Assembly Protocol** - How Susie builds a team: primary leads, supporting personas earn their seat
+- **Specialist Load Protocol** - Deterministic Read directives for loading specialist persona files
+- **Conversation Management** - Patterns for multi-persona responses: disagreement, concession, build-on, sequential contribution, convergence summary
 
 ### CLAUDE.md Activation Block
 
@@ -47,7 +47,7 @@ An interactive skill that guides persona creation through an interview process. 
 
 76 structural checks validating:
 
-- Persona file integrity (23 files, 5 sections each)
+- Persona file integrity (28 files, 5 sections each)
 - Routing engine integrity (domain registry, signal guide, specialist load protocol)
 - Manifest consistency (persona counts, signal coverage)
 - CLAUDE.md integration (Read directives, skill/audit references)
@@ -76,18 +76,18 @@ If any source is missing (e.g., no `todo.md`), Susie notes it gracefully and pro
 
 Susie evaluates the user's message holistically on every turn:
 
-1. **Check hard overrides** -- Three categorical overrides bypass intent evaluation:
-   - **War room** ("war room" phrase) -- Load ALL personas, Susie moderates
-   - **Explicit name** (user names a persona directly) -- Roster change, announce
-   - **Mode switch** (system context change) -- Activate mode's default persona
+1. **Check hard overrides** - Three categorical overrides bypass intent evaluation:
+   - **War room** ("war room" phrase) - Load ALL personas, Susie moderates
+   - **Explicit name** (user names a persona directly) - Roster change, announce
+   - **Mode switch** (system context change) - Activate mode's default persona
 
-2. **Classify user intent** -- Match the message against the Intent Classification table (9 categories: Build, Investigate, Plan, Validate, Create, Challenge, Orient, Document, Narrate). A single message can span multiple intents.
+2. **Classify user intent** - Match the message against the Intent Classification table (9 categories: Build, Investigate, Plan, Validate, Create, Challenge, Orient, Document, Narrate). A single message can span multiple intents.
 
-3. **Detect signal phrases** -- Consult the Signal Guide for shared signals (activate multiple personas) and specialist signals (activate one specialist). All matching signals inform the team assembly decision.
+3. **Detect signal phrases** - Consult the Signal Guide for shared signals (activate multiple personas) and specialist signals (activate one specialist). All matching signals inform the team assembly decision.
 
-4. **Assemble persona team** -- Select primary owner from Domain Registry, add supporting personas based on context. Every supporting persona must earn their seat by adding a genuinely different perspective.
+4. **Assemble persona team** - Select primary owner from Domain Registry, add supporting personas based on context. Every supporting persona must earn their seat by adding a genuinely different perspective.
 
-5. **Manage multi-persona response** -- Each persona's contribution is attributed with `**Name (Role):**` on its own line, with content starting on the next line. Voices stay distinct. Susie surfaces disagreements and manages convergence.
+5. **Manage multi-persona response** - Each persona's contribution is attributed with `**Name (Role):**` on its own line, with content starting on the next line. Voices stay distinct. Susie surfaces disagreements and manages convergence.
 
 ### Signal Processing
 
@@ -95,23 +95,23 @@ Susie evaluates the user's message holistically on every turn:
 - **Specialist signals** are exclusive to one persona. For example, "first principles" activates only Musk.
 - **Context-disambiguated signals** resolve based on modifier phrases. "design" alone activates Spike + Sally; "design" + "architecture" activates Winston.
 
-Susie evaluates signals holistically -- not first-match-wins. All matching signals are inputs to one team assembly decision.
+Susie evaluates signals holistically - not first-match-wins. All matching signals are inputs to one team assembly decision.
 
 ### Mode Defaults
 
 When no signal or domain match fires, Susie falls back to mode defaults:
 
-- **Ask mode** -- Mary (Business Analyst)
-- **Agent mode** -- Amelia (Developer Agent)
-- **Plan mode** -- Bob (Scrum Master) + John (Product Manager)
-- **Unknown / no mode** -- Susie (Chief of Staff) holds the floor
+- **Ask mode** - Mary (Business Analyst)
+- **Agent mode** - Amelia (Developer Agent)
+- **Plan mode** - Bob (Scrum Master) + John (Product Manager)
+- **Unknown / no mode** - Susie (Chief of Staff) holds the floor
 
 ## File Layout
 
 ```
 ~/.claude/
   rules/
-    personas/          # 23 persona .md files
+    personas/          # 28 persona .md files
     routing-engine.md  # Susie's orchestration manual
     audit-checklist.md # Structural integrity checks
   skills/
@@ -171,6 +171,6 @@ Loaded on-demand when Susie determines they are needed. Each has a Read directiv
 
 - **Deterministic routing:** Same message always activates same personas. No randomness, no LLM-decides-whether-to-load ambiguity. Susie's decision process is transparent and repeatable.
 - **Signal-based activation:** Personas activate because of WHAT the user says, not because the user asked for a specific persona.
-- **Composable teams:** Multiple personas can activate simultaneously. Susie assembles the right team per context -- primary plus supporting perspectives.
+- **Composable teams:** Multiple personas can activate simultaneously. Susie assembles the right team per context - primary plus supporting perspectives.
 - **Zero configuration:** Install once, works immediately. No per-project setup needed.
 - **Disagreement by default:** When multiple personas are active, Susie surfaces genuine tension between perspectives. A multi-persona response where everyone agrees is a sign that disagreement was suppressed.
