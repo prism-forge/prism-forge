@@ -1,33 +1,38 @@
-# PRISM -- System Audit Checklist
+# PRISM - System Audit Checklist
 
 > Boris (Type System Auditor) lead, Quinn (QA Engineer) support.
 > Run when: new personas added, routing engine modified, system installed on new machine, or drift suspected.
 
-## 1. Persona File Integrity (23 files)
+## 1. Persona File Integrity (28 files)
 
-- [ ] All 23 persona files exist at `{PRISM_PERSONAS}/`
+- [ ] All 28 persona files exist at `{PRISM_PERSONAS}/`
 - [ ] Each file has sections: Identity, Communication Style, Principles, Domain Application, Signals
 - [ ] No file exceeds 800 lines
 - [ ] No IDE-specific content (`.mdc`, `alwaysApply`, `globs`, workspace paths)
 - [ ] No domain-specific content in global personas
 
 ### Always-On (4)
-- [ ] `persona-analyst-mary.md` -- mode default: Ask
-- [ ] `persona-dev-amelia.md` -- mode default: Agent
-- [ ] `persona-scrum-master-bob.md` -- mode default: Plan
-- [ ] `persona-qa-quinn.md` -- mode default: Any (validation signals)
+- [ ] `persona-analyst-mary.md` - mode default: Ask
+- [ ] `persona-dev-amelia.md` - mode default: Agent
+- [ ] `persona-scrum-master-bob.md` - mode default: Plan
+- [ ] `persona-qa-quinn.md` - mode default: Any (validation signals)
 
 ### Dynamic Orchestrator (1)
-- [ ] `persona-chief-of-staff-susie.md` -- Turn 1 unconditional + no-signal fallback
+- [ ] `persona-chief-of-staff-susie.md` - Turn 1 unconditional + no-signal fallback
 
-### Specialists (17)
-- [ ] All 18 specialist files present and non-empty
+### Specialists (23)
+- [ ] All 23 specialist files present and non-empty
+- [ ] `persona-growth-strategist-atlas.md` - Atlas (Growth Strategist)
+- [ ] `persona-financial-strategist-morgan.md` - Morgan (Financial Strategist)
+- [ ] `persona-data-strategist-sagan.md` - Sagan (Data Strategist)
+- [ ] `persona-infrastructure-engineer-phoenix.md` - Phoenix (Infrastructure Engineer)
+- [ ] `persona-community-architect-koa.md` - Koa (Community Architect)
 
 ## 2. Routing Engine Integrity
 
 ### Routing engine file and framing (2)
 - [ ] `{PRISM_ROUTING}/routing-engine.md` exists
-- [ ] Title is "Persona Routing Engine -- Susie's Orchestration Manual"
+- [ ] Title is "Persona Routing Engine - Susie's Orchestration Manual"
 
 ### Susie's Role section (2)
 - [ ] Turn 1 behavior defined (6 steps: read todo, read memory, read handoffs, check git, deliver sitrep, hand off)
@@ -59,16 +64,16 @@
 - [ ] Each pattern has example format
 
 ### Domain Registry in Reference Tables (2)
-- [ ] Has exactly 23 rows
+- [ ] Has exactly 28 rows
 - [ ] Every domain row has: Work Type, Primary Owner, Supporting, Notes
 
 ### Signal Guide in Reference Tables (3)
 - [ ] Shared signals sub-table has exactly 24 entries
-- [ ] Specialist signals sub-table has exactly 18 entries
+- [ ] Specialist signals sub-table has exactly 23 entries
 - [ ] Each specialist signal row maps to exactly one persona
 
 ### Specialist Load Protocol (4)
-- [ ] Has exactly 18 specialist entries
+- [ ] Has exactly 23 specialist entries
 - [ ] Every entry has: name, signals, Read directive path, announce line
 - [ ] Every Read path follows `{PRISM_PERSONAS}/persona-{slug}.md` pattern
 - [ ] Every Read path matches an actual file in `{PRISM_PERSONAS}/`
@@ -86,10 +91,10 @@
 
 ## 3. Manifest Consistency
 
-- [ ] `persona-manifest.md` lists all 23 personas
+- [ ] `persona-manifest.md` lists all 28 personas
 - [ ] Always-On table has 4 entries matching actual always-on files
 - [ ] Dynamic Orchestrator table has 1 entry (Susie)
-- [ ] Specialist table has 18 entries matching actual specialist files
+- [ ] Specialist table has 23 entries matching actual specialist files
 - [ ] Signal Coverage Map domains match routing engine Domain Registry
 - [ ] Shared Signals table matches routing engine Signal Guide shared signals
 - [ ] Routing Quick Reference includes multi-intent example
@@ -131,8 +136,8 @@
 
 ---
 
-**Total checks:** 76
-**Pass threshold:** 76/76 (no partial credit -- every check is structural)
+**Total checks:** 81
+**Pass threshold:** 81/81 (no partial credit - every check is structural)
 
-*Last updated: 2026-03-19*
-*PRISM v1.0 -- Persona Engine*
+*Last updated: 2026-07-06*
+*PRISM v2.0 - Persona Engine (28 personas)*
