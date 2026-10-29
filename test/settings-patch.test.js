@@ -535,4 +535,76 @@ describe('settings-patch', () => {
       assert.equal(settings.hooks.Stop[0].hooks[0]._prism_v2_marker, 'abc123de');
     });
   });
+
+  describe('Unparseable settings.json', () => {
+    const hook = {
+      name: 'prism_session_start.sh',
+      type: 'SessionStart',
+      extType: 'sh',
+      hash: 'abc123def456',
+      hash_prefix: 'abc123de',
+      installed_path: '/home/test/.claude/hooks/prism_session_start.sh',
+    };
+
+    it('throws and leaves a malformed file byte-for-byte unchanged on install', () => {
+      const settingsPath = join(tmpDir, 'settings-malformed.json');
+      const original = '{\n  "model": "opus",\n  "permissions": { "deny": ["Read(./.env)"] },\n}\n';
+      writeFileSync(settingsPath, original, 'utf-8');
+
+      assert.throws(
+        () => patchSettings({ action: 'install', hooks: [hook], settingsPath }),
+        /is not valid JSON/,
+      );
+      assert.equal(readFileSync(settingsPath, 'utf-8'), original, 'Malformed file must not be modified');
+      assert.equal(existsSync(settingsPath + '.prism-backup'), false, 'No backup should be written when nothing is written');
+    });
+
+    it('throws and leaves a malformed file unchanged on uninstall', () => {
+      const settingsPath = join(tmpDir, 'settings-malformed-uninstall.json');
+      const original = '{ "model": "opus", // comment\n}\n';
+      writeFileSync(settingsPath, original, 'utf-8');
+
+      assert.throws(
+        () => patchSettings({ action: 'uninstall', hooks: [hook], settingsPath }),
+        /is not valid JSON/,
+      );
+      assert.equal(readFileSync(settingsPath, 'utf-8'), original);
+    });
+
+    it('merges into a file that starts with a UTF-8 BOM instead of discarding it', () => {
+      const settingsPath = join(tmpDir, 'settings-bom.json');
+      writeFileSync(settingsPath, '﻿{ "model": "opus", "permissions": { "deny": ["Read(./.env)"] } }\n', 'utf-8');
+
+      const result = patchSettings({ action: 'install', hooks: [hook], settingsPath });
+      assert.equal(result.patched, true);
+
+      const settings = readSettings(settingsPath);
+      assert.equal(settings.model, 'opus', 'Existing settings must be preserved');
+      assert.deepEqual(settings.permissions.deny, ['Read(./.env)']);
+      assert.equal(settings.hooks.SessionStart.length, 1);
+    });
+  });
+
+  describe('Backup before write', () => {
+    it('copies the previous settings.json to settings.json.prism-backup before overwriting', () => {
+      const settingsPath = join(tmpDir, 'settings-backup.json');
+      const original = '{ "model": "opus" }\n';
+      writeFileSync(settingsPath, original, 'utf-8');
+
+      patchSettings({
+        action: 'install',
+        hooks: [{
+          name: 'prism_session_start.sh',
+          type: 'SessionStart',
+          extType: 'sh',
+          hash: 'abc123def456',
+          hash_prefix: 'abc123de',
+          installed_path: '/home/test/.claude/hooks/prism_session_start.sh',
+        }],
+        settingsPath,
+      });
+
+      assert.equal(readFileSync(settingsPath + '.prism-backup', 'utf-8'), original);
+    });
+  });
 });
